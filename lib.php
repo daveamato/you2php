@@ -67,38 +67,37 @@ function videoCategories($apikey,$regionCode='HK'){
 
 function categorieslist($id){
    $data=array(
-    '1' => '电影和动画',
-    '2' => '汽车',
-    '10' => '音乐',
-    '15' => '宠物和动物',
-    '17' => '体育',
-    '18' => '短片',
-    '19' => '旅游和活动',
-    '20' => '游戏',
-    '21' => '视频博客',
-    '22' => '人物和博客',
-    '23' => '喜剧',
-    '24' => '娱乐',
-    '25' => '新闻和政治',
-    '26' => 'DIY 和生活百科',
-    '27' => '教育',
-    '28' => '科学和技术',
-    '30' => '电影',
-    '31' => '动漫/动画',
-    '32' => '动作/冒险',
-    '33' => '经典',
-    '34' => '喜剧',
-    '35' => '纪录片',
-    '36' => '剧情片',
-    '37' => '家庭片',
-    '38' => '外国',
-    '39' => '恐怖片',
-    '40' => '科幻/幻想',
-    '41' => '惊悚片',
-    '42' => '短片',
-    '43' => '节目',
-    '44' => '预告片'
-       );
+   '1' => 'Movie and Animation',
+   '2' => 'Car',
+   '10' => 'Music',
+   '15' => 'Pets and Animals',
+   '17' => 'Sports', 
+   '18' => 'short film',
+   '19' => 'travel and activities',
+   '20' => 'game',
+   '21' => 'video blog',
+   '22' => 'characters and blogs',
+   '23' => 'comedy',
+   '24' => 'entertainment',
+   '25' => 'news And politics', 
+   '26' => 'DIY and Life Encyclopedia',
+   '27' => 'education',
+   '28' => 'Science and Technology',
+   '30' => 'movie',
+   '31' => 'anime/animation',
+   '32' => 'Action/Adventure',
+   '33' => 'classic',
+   '34' => 'comedy',
+   '35' => 'documentary',
+   '36' => 'drama',
+   '37' => 'family film',
+   '38' => 'foreign',
+   '39' => 'horror film',
+   '40' => 'sci-fi/fantasy',
+   '41' => 'thriller',
+   '42' => 'short film',
+   '43' => 'program',
+   '44' => 'trailer');
      if($id=='all'){
      return $data;    
      }else{
@@ -135,13 +134,13 @@ function format_date($time){
     $t=strtotime($time);
     $t=time()-$t;
     $f=array(
-    '31536000'=>'年',
-    '2592000'=>'个月',
-    '604800'=>'周',
-    '86400'=>'天',
-    '3600'=>'小时',
-    '60'=>'分钟',
-    '1'=>'秒'
+    '31536000'=>'Years',
+    '2592000'=>'Months',
+    '604800'=>'Weeks',
+    '86400'=>'Days',
+    '3600'=>'Hours',
+    '60'=>'Minutes',
+    '1'=>'Seconds'
     );
     foreach ($f as $k=>$v)    {
         if (0 !=$c=floor($t/(int)$k)) {
@@ -230,9 +229,9 @@ function video_down($v,$name){
 $yt = new YouTubeDownloader();
 $links = $yt->getDownloadLinks("https://www.youtube.com/watch?v=$v");
 echo '<table class="table table-hover"><thead><tr>
-      <th>格式</th>
-      <th>类型</th>
-      <th>下载</th>
+      <th>Format</th>
+      <th>Type</th>
+      <th>Download</th>
     </tr>
   </thead>';
 foreach ($links as $value) {
@@ -242,7 +241,7 @@ echo ' <tbody>
       
       <td>'.$videotype[$value['format']][0].'</td>
       <td>'.$videotype[$value['format']][1].'</td>
-      <td><a href="./downvideo.php?v='.$v.'&quality='.$value['format'].'&name='.$name.'&format='.$videotype[$value['format']][2].'" target="_blank" class="btn btn-outline-success btn-sm">下载</a></td>
+      <td><a href="./downvideo.php?v='.$v.'&quality='.$value['format'].'&name='.$name.'&format='.$videotype[$value['format']][2].'" target="_blank" class="btn btn-outline-success btn-sm">Download</a></td>
     </tr></tbody>';
     } 
     echo '</table>';
@@ -408,31 +407,31 @@ function strdecode($string,$key='09KxDsIIe|+]8Fo{YP<l+3!y#>a$;^PzFpsxS9&d;!l;~M>
 }
 
 //分享功能
-function shareit($id,$title='免翻墙Youtube镜像'){
+function shareit($id,$title='ChowderTube'){
     $pic=ROOT_PART.'/thumbnail.php?vid='.$id;
     $url=ROOT_PART.'watch-'.$id.'.html';
     $title=str_replace('&','||',$title);
     $title=str_replace('"',' ',$title);
      $title=str_replace("'",' ',$title);
-    $des='【免翻墙Youtube镜像】我正在通过这个网站看《'.$title.'》不用翻墙看全球视频，手机电脑都能看，快来试试吧！';
+    $des='【ChowderTube】《'.$title.'》';
     return "<div id='share'>
   <a class='icoqz' href='https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=".$url."&desc=".$des."&title=".$titlel."
-&pics=".$pic."' target='blank' title='分享到QQ空间'><i class='iconfont icon-qqkongjian icofontsize'></i></a>
+&pics=".$pic."' target='blank' title='QQ'><i class='iconfont icon-qqkongjian icofontsize'></i></a>
 
-  <a class='icotb' href='http://tieba.baidu.com/f/commit/share/openShareApi?title=".$title."&url=".$url."&to=tieba&type=text&relateUid=&pic=".$pic."&key=&sign=on&desc=&comment=".$title."' target='blank' title='分享到贴吧'><i class='iconfont icon-40 icofontsize'></i></a>
+  <a class='icotb' href='http://tieba.baidu.com/f/commit/share/openShareApi?title=".$title."&url=".$url."&to=tieba&type=text&relateUid=&pic=".$pic."&key=&sign=on&desc=&comment=".$title."' target='blank' title='Baidu'><i class='iconfont icon-40 icofontsize'></i></a>
 
   <a class='icowb' href='http://service.weibo.com/share/share.php?url=".$url."&title=".$des."&pic=".$pic."&sudaref=".$title."' target='blank' title='分享到微博'><i class='iconfont icon-weibo icofontsize'></i></a>
 
-  <a class='icobi' href='https://member.bilibili.com/v/#/text-edit' target='blank' title='分享到哔哩哔哩'><i class='iconfont icon-bilibili icofontsize'></i></a>
+  <a class='icobi' href='https://member.bilibili.com/v/#/text-edit' target='blank' title='BiliBili'><i class='iconfont icon-bilibili icofontsize'></i></a>
 
-  <a class='icowx' href='http://api.addthis.com/oexchange/0.8/forward/wechat/offer?url=".ROOT_PART."watch.php?v=".$id."' target='blank' title='分享到微信' ><i class='iconfont icon-weixin icofontsize'></i></a>
+  <a class='icowx' href='http://api.addthis.com/oexchange/0.8/forward/wechat/offer?url=".ROOT_PART."watch.php?v=".$id."' target='blank' title='AddThis' ><i class='iconfont icon-weixin icofontsize'></i></a>
 </div>
  <div class='form-group'><div class='d-inline-block h6 pt-3 col-12'>
     分享代码：
  </div>
     <textarea style='resize:none;height: auto' class='form-control d-inline align-middle col-12 icoys icontext' id='inputs' type='text' rows='5' placeholder='Default input'><iframe height=498 width=510 src=&quot;".ROOT_PART."embed/?v=".$id."&quot; frameborder=0 &quot;allowfullscreen&quot;></iframe></textarea>
     
-    <button type='submit' class='btn btn-primary align-middle col-12 mt-2' onclick='copytext1()'>复制</button></div>";
+    <button type='submit' class='btn btn-primary align-middle col-12 mt-2' onclick='copytext1()'>Copy</button></div>";
     
 }
 //
