@@ -1,15 +1,12 @@
- <footer class="p-2">
+ <footer class="p-2 bg-primary">
         <p  class="text-white p-1 m-1 h6">
             Copyright © <?php echo date('Y');?> All Rights Reserved </br>
-        </p>
-        <p  class="text-white  m-1 p-1 h6">
-            <a href="./embed/upgrade.php" target="_blank" class="text-white ml-2">Check for updates</a>
         </p>
     </footer>
   
   
   <script src="https://cdn.bootcss.com/popper.js/1.11.0/umd/popper.min.js"></script>
-  <script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://cdn.bootcss.com/Swiper/4.0.6/js/swiper.min.js"></script>  
   <script>
     $(".carousel").on("touchstart", function(event){
