@@ -1,17 +1,14 @@
 <?php
 /**
- * Youtube Proxy 
- * Simple Youtube PHP Proxy Server
- * @author ZXQ
- * @version V1.2
- * @description 核心操作函数集合
+ * ChowderTube
+ * @author ch0wder
+ * @version v2.0
+ * @description An open source proxy to YouTube
  */
 
 require_once(dirname(__FILE__).'/config.php');
 
-//加载第三方ytb解析库
 require_once(dirname(__FILE__).'/YouTubeDownloader.php');
-//获取远程数据函数
  function get_data($url){
     if (!function_exists("curl_init")) {
 		$f = file_get_contents($url);
@@ -27,40 +24,38 @@ require_once(dirname(__FILE__).'/YouTubeDownloader.php');
 	}
    return $f;  
 }
-//获取类别热门视频
-function get_trending($apikey,$max,$pageToken='',$regionCode='vn'){
+
+function get_trending($apikey,$max,$pageToken='',$regionCode='US'){
     $apilink='https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&chart=mostPopular&regionCode='.$regionCode.'&maxResults='.$max.'&key='.$apikey.'&pageToken='.$pageToken;
      return json_decode(get_data($apilink),true);
 }
 
-//获取视频数据函数
+
  function get_video_info($id,$apikey){
     $apilink='https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id='.$id.'&key='.$apikey;
      return json_decode(get_data($apilink),true);
 }
 
-//获取用户频道数据
+
 function get_channel_info($cid,$apikey){
    $apilink='https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&hl=zh&id='.$cid.'&key='.$apikey;
    return json_decode(get_data($apilink),true);
 }
 
-//获取相关视频
 function get_related_video($vid,$apikey){
    $apilink='https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=24&relatedToVideoId='.$vid.'&key='.$apikey;
    return json_decode(get_data($apilink),true);
 }
 
 
-//获取用户频道视频
-function get_channel_video($cid,$pageToken='',$apikey,$regionCode='VN'){
-   $apilink='https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&maxResults=50&type=video&regionCode='.$regionCode.'&hl=zh-CN&channelId='.$cid.'&key='.$apikey.'&pageToken='.$pageToken;
+function get_channel_video($cid,$pageToken='',$apikey,$regionCode='US'){
+   $apilink='https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&maxResults=50&type=video&regionCode='.$regionCode.'&hl=en-US&channelId='.$cid.'&key='.$apikey.'&pageToken='.$pageToken;
    return json_decode(get_data($apilink),true);
 }
 
-//获取视频类别内容
-function videoCategories($apikey,$regionCode='HK'){
-   $apilink='https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode='.$regionCode.'&hl=zh-CN&key='.$apikey;
+
+function videoCategories($apikey,$regionCode='US'){
+   $apilink='https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode='.$regionCode.'&hl=en-US&key='.$apikey;
    return json_decode(get_data($apilink),true);
 }
 
@@ -72,52 +67,49 @@ function categorieslist($id){
    '10' => 'Music',
    '15' => 'Pets and Animals',
    '17' => 'Sports', 
-   '18' => 'short film',
-   '19' => 'travel and activities',
-   '20' => 'game',
-   '21' => 'video blog',
-   '22' => 'characters and blogs',
-   '23' => 'comedy',
-   '24' => 'entertainment',
-   '25' => 'news And politics', 
+   '18' => 'Short Film',
+   '19' => 'Travel and Activities',
+   '20' => 'Game',
+   '21' => 'Video Blogs',
+   '22' => 'Characters and Blogs',
+   '23' => 'Comedy',
+   '24' => 'Entertainment',
+   '25' => 'News & Politics', 
    '26' => 'DIY and Life Encyclopedia',
-   '27' => 'education',
+   '27' => 'Education',
    '28' => 'Science and Technology',
-   '30' => 'movie',
-   '31' => 'anime/animation',
+   '30' => 'Movie',
+   '31' => 'Anime/Animation',
    '32' => 'Action/Adventure',
-   '33' => 'classic',
-   '34' => 'comedy',
-   '35' => 'documentary',
-   '36' => 'drama',
-   '37' => 'family film',
-   '38' => 'foreign',
-   '39' => 'horror film',
-   '40' => 'sci-fi/fantasy',
-   '41' => 'thriller',
-   '42' => 'short film',
-   '43' => 'program',
-   '44' => 'trailer');
+   '33' => 'Classic',
+   '34' => 'Comedy',
+   '35' => 'Documentary',
+   '36' => 'Drama',
+   '37' => 'Family Film',
+   '38' => 'Foreign',
+   '39' => 'Horror Film',
+   '40' => 'Sci-Fi/Fantasy',
+   '41' => 'Thriller',
+   '42' => 'Short Film',
+   '43' => 'Program',
+   '44' => 'Trailer');
      if($id=='all'){
      return $data;    
      }else{
       return $data[$id];   
      }
 }
-//获取视频类别内容
-function Categories($id,$apikey,$pageToken='',$order='relevance',$regionCode='VN'){
-   $apilink='https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&&regionCode='.$regionCode.'&hl=zh-ZH&maxResults=48&videoCategoryId='.$id.'&key='.$apikey.'&order='.$order.'&pageToken='.$pageToken;
+
+function Categories($id,$apikey,$pageToken='',$order='relevance',$regionCode='US'){
+   $apilink='https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&&regionCode='.$regionCode.'&hl=en-US&maxResults=48&videoCategoryId='.$id.'&key='.$apikey.'&order='.$order.'&pageToken='.$pageToken;
    return json_decode(get_data($apilink),true);
 }
 
-
-//获取搜索数据
-function get_search_video($query,$apikey,$pageToken='',$type='video',$order='relevance',$regionCode='VN'){
+function get_search_video($query,$apikey,$pageToken='',$type='video',$order='relevance',$regionCode='US'){
    $apilink='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=48&order='.$order.'&type='.$type.'&q='.$query.'&key='.$apikey.'&pageToken='.$pageToken;
    return json_decode(get_data($apilink),true);
 }
 
-//api返回值时间转换函数1
 function covtime($youtube_time){
     $start = new DateTime('@0'); 
     $start->add(new DateInterval($youtube_time));
@@ -127,9 +119,9 @@ function covtime($youtube_time){
      return $start->format('H:i:s');   
     }
     
-}   
+}
 
-//转换时间函数，计算发布时间几天前几年前
+
 function format_date($time){
     $t=strtotime($time);
     $t=time()-$t;
@@ -144,17 +136,16 @@ function format_date($time){
     );
     foreach ($f as $k=>$v)    {
         if (0 !=$c=floor($t/(int)$k)) {
-            return $c.$v.'前';
+            return $c .' ' . $v.' ago';
         }
     }
 }
 
-//api返回值时间转换函数2
+
 function str2time($ts) {
  return date("Y-m-d H:i", strtotime($ts));
 }
 
- //播放量转换
 function convertviewCount($value){
     if($value <= 10000){
     $number = $value;   
@@ -166,7 +157,7 @@ function convertviewCount($value){
     
     return $number;
 }
-//获取banner背景
+
 function get_banner($a,$apikey){
    $apilink='https://www.googleapis.com/youtube/v3/channels?part=brandingSettings&id='.$a.'&key='.$apikey;
    $json=json_decode(get_data($apilink),true);
@@ -183,8 +174,8 @@ $videotype=array(
     'WebM360P' => array('webM','360P','webm'), 
     'Unknown' => array('N/A','N/A','3gpp'), 
     );
-    
-//获取相关频道 api不支持，靠采集完成
+
+
 require_once(dirname(__FILE__).'/inc/phpQuery.php');
 require_once(dirname(__FILE__).'/inc/QueryList.php');
 use QL\QueryList;
@@ -198,9 +189,9 @@ function get_related_channel($id){
 return $data = QueryList::Query(get_data($channel),$rules)->data;
 }
 
-//采集抓取随机推荐内容
+
 function random_recommend(){
-   $dat=get_data('https://www.youtube.com/?gl=TW&hl=zh-CN'); 
+   $dat=get_data('https://www.youtube.com/?gl=US&hl=en-US'); 
    $rules = array(
     't' => array('#feed .individual-feed .section-list li .item-section li .feed-item-container .feed-item-dismissable .shelf-title-table .shelf-title-row h2 .branded-page-module-title-text','text'),
     'html' => array('#feed .individual-feed .section-list li .item-section li .feed-item-container .feed-item-dismissable .compact-shelf .yt-viewport .yt-uix-shelfslider-list','html'),
@@ -224,7 +215,8 @@ function random_recommend(){
     array_shift($ldata);
     return $ldata;
 }
-//视频下载
+
+
 function video_down($v,$name){
 $yt = new YouTubeDownloader();
 $links = $yt->getDownloadLinks("https://www.youtube.com/watch?v=$v");
@@ -247,7 +239,7 @@ echo ' <tbody>
     echo '</table>';
 }
 
-//判断高清微缩图是否存在
+
 function get_thumbnail_code($vid){
 $thumblink='https://img.youtube.com/vi/'.$vid.'/maxresdefault.jpg';    
 $oCurl = curl_init();
@@ -271,14 +263,13 @@ if($headerSize == '404'){
 }
 
 
-//解析历史记录
 function Hislist($str,$apikey){
     $str=str_replace('@',',',$str);
     $apilink='https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id='.$str.'&key='.$apikey;
    return json_decode(get_data($apilink),true);   
 }
 
-//获取频道所属国家
+
 $CountryID=array(
     'DZ' => '阿尔及利亚',
     'AR' => '阿根廷',
@@ -329,7 +320,7 @@ $CountryID=array(
     'RO' => '罗马尼亚',
     'MY' => '马来西亚',
     'MK' => '马其顿',
-    'US' => '美国',
+    'US' => 'United States',
     'PE' => '秘鲁',
     'MA' => '摩洛哥',
     'MX' => '墨西哥',
@@ -367,7 +358,7 @@ $CountryID=array(
     'IT' => '意大利',
     'IN' => '印度',
     'ID' => '印尼',
-    'GB' => '英国',
+    'GB' => 'United. Kingdom',
     'JO' => '约旦',
     'VN' => '越南',
     'CL' => '智利',
@@ -377,7 +368,6 @@ function get_country($c){
     return  $CountryID[$c];
 }
 
-//url字符串加解密
 function strencode($string,$key='09KxDsIIe|+]8Fo{YP<l+3!y#>a$;^PzFpsxS9&d;!l;~M>2?N7G}`@?UJ@{FDI') {
     $key = sha1($key);
     $strLen = strlen($string);
@@ -406,7 +396,7 @@ function strdecode($string,$key='09KxDsIIe|+]8Fo{YP<l+3!y#>a$;^PzFpsxS9&d;!l;~M>
     return $hash;
 }
 
-//分享功能
+
 function shareit($id,$title='ChowderTube'){
     $pic=ROOT_PART.'/thumbnail.php?vid='.$id;
     $url=ROOT_PART.'watch-'.$id.'.html';
@@ -418,47 +408,46 @@ function shareit($id,$title='ChowderTube'){
   <a class='icoqz' href='https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=".$url."&desc=".$des."&title=".$titlel."
 &pics=".$pic."' target='blank' title='QQ'><i class='iconfont icon-qqkongjian icofontsize'></i></a>
 
-  <a class='icotb' href='http://tieba.baidu.com/f/commit/share/openShareApi?title=".$title."&url=".$url."&to=tieba&type=text&relateUid=&pic=".$pic."&key=&sign=on&desc=&comment=".$title."' target='blank' title='Baidu'><i class='iconfont icon-40 icofontsize'></i></a>
+  <a class='icotb' href='http://tieba.baidu.com/f/commit/share/openShareApi?title=".$title."&url=".$url."&to=tieba&type=text&relateUid=&pic=".$pic."&key=&sign=on&desc=&comment=".$title."' target='blank' title='Share to Baidu'><i class='iconfont icon-40 icofontsize'></i></a>
 
-  <a class='icowb' href='http://service.weibo.com/share/share.php?url=".$url."&title=".$des."&pic=".$pic."&sudaref=".$title."' target='blank' title='分享到微博'><i class='iconfont icon-weibo icofontsize'></i></a>
+  <a class='icowb' href='http://service.weibo.com/share/share.php?url=".$url."&title=".$des."&pic=".$pic."&sudaref=".$title."' target='blank' title='Share to Weibo'><i class='iconfont icon-weibo icofontsize'></i></a>
 
-  <a class='icobi' href='https://member.bilibili.com/v/#/text-edit' target='blank' title='BiliBili'><i class='iconfont icon-bilibili icofontsize'></i></a>
+  <a class='icobi' href='https://member.bilibili.com/v/#/text-edit' target='blank' title='Share to BiliBili'><i class='iconfont icon-bilibili icofontsize'></i></a>
 
-  <a class='icowx' href='http://api.addthis.com/oexchange/0.8/forward/wechat/offer?url=".ROOT_PART."watch.php?v=".$id."' target='blank' title='AddThis' ><i class='iconfont icon-weixin icofontsize'></i></a>
+  <a class='icowx' href='http://api.addthis.com/oexchange/0.8/forward/wechat/offer?url=".ROOT_PART."watch.php?v=".$id."' target='blank' title='Share to AddThis' ><i class='iconfont icon-weixin icofontsize'></i></a>
 </div>
  <div class='form-group'><div class='d-inline-block h6 pt-3 col-12'>
-    分享代码：
+   Info：
  </div>
-    <textarea style='resize:none;height: auto' class='form-control d-inline align-middle col-12 icoys icontext' id='inputs' type='text' rows='5' placeholder='Default input'><iframe height=498 width=510 src=&quot;".ROOT_PART."embed/?v=".$id."&quot; frameborder=0 &quot;allowfullscreen&quot;></iframe></textarea>
+    <textarea style='resize:none;height: auto' class='form-control d-inline align-middle col-12 icoys icontext' id='inputs' type='text' rows='5' placeholder='Default Input'><iframe height=498 width=510 src=&quot;".ROOT_PART."embed/?v=".$id."&quot; frameborder=0 &quot;allowfullscreen&quot;></iframe></textarea>
     
     <button type='submit' class='btn btn-primary align-middle col-12 mt-2' onclick='copytext1()'>Copy</button></div>";
     
 }
-//
+
 function html5_player($id){
     $yt = new YouTubeDownloader();
     $links = $yt->getDownloadLinks('https://www.youtube.com/watch?v='.$id);
     if(count($links)!=1){
         echo'<video id="h5player"  class="video-js vjs-fluid mh-100 mw-100" loop="loop" width="100%" preload="auto"  webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" controls="controls" controls preload="auto" width="100%" poster="./thumbnail.php?type=maxresdefault&vid='.$id.'" data-setup=\'\'>';
         
-        //获取视频分辨率
+        
         if(array_key_exists('22',$links)){
         echo '<source src="./vs.php?vv='.$id.'&quality=720" type=\'video/mp4\' res="720" label=\'720P\'/>';   
             };
         echo '<source src="./vs.php?vv='.$id.'&quality=360" type=\'video/mp4\' res="360" label=\'360P\'/>';
         
-        
-    //提取字幕
+
      $slink='https://www.youtube.com/api/timedtext?type=list&v='.$id;
      $vdata=get_data($slink);
      @$xml = simplexml_load_string($vdata);
      $array1=json_decode(json_encode($xml), true);
      $arr=array();
-     //分离出几种常用字幕
+    
      if(array_key_exists('track',$array1) && array_key_exists('0',$array1['track'])){
          if (array_key_exists('track', $array1) && array_key_exists('0', $array1['track'
     									   ])) {
-    	foreach ($array1['track'] as $val) {if ($val['@attributes']['lang_code'] == 'en' || $val['@attributes']['lang_code'] == 'zh' || $val['@attributes']['lang_code'] =='zh-CN' || $val['@attributes']['lang_code'] =='zh-TW' || $val['@attributes']['lang_code'] =='zh-HK') {
+    	foreach ($array1['track'] as $val) {if ($val['@attributes']['lang_code'] == 'en') {
     			$arr[$val['@attributes']['lang_code']] = "
     <track kind='captions' src='./tracks.php?vtt={$id}&lang=" . $val['@attributes']
     ['lang_code'] . "' srclang='" . $val['@attributes']['lang_code'] . "' label='" .
@@ -467,18 +456,6 @@ function html5_player($id){
     	}
     	foreach ($arr as $k => $v) {
     	    switch ($k) {
-    		    case 'zh-CN':
-    		        $arr[$k] = substr_replace($v, ' default ', -2,0);
-    				break;
-    			case 'zh':
-    		        $arr[$k] = substr_replace($v, ' default ', -2,0);
-    				break;
-    			case 'zh-HK':
-    		        $arr[$k] = substr_replace($v, ' default ', -2,0);
-    				break;
-    			case 'zh-TW':
-    				$arr[$k] = substr_replace($v, ' default ', -2,0);
-    				break;
     			case 'en':
     				$arr[$k] = substr_replace($v, ' default ', -2,0);
     				break;
@@ -498,7 +475,8 @@ function html5_player($id){
         echo '<img src="./inc/2.svg" class="w-100" onerror="this.onerror=null; this.src="./inc/2.gif"">';       
         }   
 }
-//获取安装目录
+
+
 function Root_part(){
 $http=isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
 $part=rtrim($_SERVER['SCRIPT_NAME'],basename($_SERVER['SCRIPT_NAME']));
