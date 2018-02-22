@@ -1,6 +1,6 @@
  <footer class="p-2 bg-primary">
-        <p  class="text-white p-1 m-1 h6">
-            Copyright © <?php echo date('Y');?> All Rights Reserved </br>
+        <p class="text-white p-1 m-1 h6">
+            <strong>Copyright © <?php echo date('Y');?><br/>All Rights Reserved</strong>
         </p>
     </footer>
   
