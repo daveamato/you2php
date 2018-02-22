@@ -160,7 +160,7 @@ ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
         <li class="list-group-item"><i class="fa fa-file-code-o fa-fw pr-4 pr-4"></i><a href="./content.php?cont=api" class="text-dark">API</a></li>
         </ul>
         <ul class="list-group pt-3">
-        <li class="list-group-item font-weight-bold"></i>YOUTUBE 精选</li>
+        <li class="list-group-item font-weight-bold"></i>Categories</li>
         ';
         foreach($vica['items'] as $v){
         echo '<li class="list-group-item"><a href="./content.php?cont=category&sortid='.$v['id'].'" class="text-dark">'.$v['snippet']['title'].'</a></li>';    
