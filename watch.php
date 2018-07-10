@@ -10,7 +10,7 @@
       header("Location: ./error.php");
       exit();
     }
-    //记录历史浏览观看记录
+    
     $tt=time()+1814400;
     if(!isset($_COOKIE['history'])){
      setcookie("history",$videodata['items']['0']['id'], $tt);   
@@ -19,7 +19,7 @@
     $history=$_COOKIE['history'];
     $histmp=explode('@',$history);
     
-    //重复的浏览历史只记录最新一次
+
 if (in_array($videodata['items']['0']['id'] ,$histmp)){
         $akey=array_search($videodata['items']['0']['id'],$histmp);
          unset($histmp[$akey]);
@@ -28,7 +28,7 @@ if (in_array($videodata['items']['0']['id'] ,$histmp)){
      array_unshift($histmp,$videodata['items']['0']['id']);    
     }
     
-    //最大观看记录条数，超出的删除
+    
     if(count($histmp)==30){
     array_pop($histmp);
     }
@@ -96,7 +96,7 @@ if (in_array($videodata['items']['0']['id'] ,$histmp)){
                     
                     </span>
                     
-                    <a href="./channel.php?channelid=<?php echo $videodata['items']['0']['snippet']['channelId'] ?>" class="btn btn-sm btn-c pull-right fsize2 my-1"><p class="text-primary m-0 px-2">Home</p></a>
+                    <a href="./channel.php?channelid=<?php echo $videodata['items']['0']['snippet']['channelId'] ?>" class="btn btn-sm btn-c pull-right fsize2 my-1"><p class="text-primary m-0 px-2">Profile</p></a>
                    
                 </div>
         <div id="tags" class="w-100 pb-2 vinfo">

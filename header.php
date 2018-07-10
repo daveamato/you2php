@@ -6,15 +6,15 @@ error_reporting( E_ALL&~E_NOTICE );
 <head>
 <meta charset="utf-8">
 <title><?php echo $headtitle ?></title>
-<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,shrink-to-fit=no" name="viewport" />
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
 <meta name="keywords" content="ChowderTube" />
 <meta name="description" content="ChowderTube" />
-<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" >
-<link href="https://cdn.bootcss.com/Swiper/4.0.6/css/swiper.min.css" rel="stylesheet"> 
+<link rel="stylesheet" href="//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
+<link href="//cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css" rel="stylesheet"> 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
 <script src="//cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.js"></script>
-<link href="//cdn.bootcss.com/video.js/5.20.4/alt/video-js-cdn.min.css" rel="stylesheet" />
-<script src="//libs.cdnjs.net/video.js/5.20.4/video.min.js"></script>
+<link href="//vjs.zencdn.net/7.0.5/video-js.css" rel="stylesheet" />
+<script src="//vjs.zencdn.net/7.0.5/video-js.js"></script>
 <script type="text/javascript" src="./inc/4.js"></script>
 <link rel="stylesheet" href="./inc/theme.css" type="text/css">
 <link rel="stylesheet" href="./inc/iconfont.css">

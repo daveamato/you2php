@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="en">
 <head>
-    <title>You2PHP安装！</title>
+    <title>ChowderTube Installation</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="https://wangxiaoqing123.coding.me/hellocss.coding.me/pintuer.css">
-    <script src="//apps.bdimg.com/libs/jquery/1.10.1/jquery.js"></script>
-    <script src="https://wangxiaoqing123.coding.me/hellocss.coding.me/pintuer.js"></script>
-    <script src="https://wangxiaoqing123.coding.me/hellocss.coding.me/respond.js"></script>
+    <link rel="stylesheet" href="inc/pintuer.css">
+    <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="inc/pintuer.js"></script>
+    <script src="inc/respond.min.js"></script>
     <style>
     #a1{
     height: 90px;
@@ -59,9 +59,9 @@ date_default_timezone_set('PRC');
 if($_GET['step'] =='4' && !empty($_GET)){
 
  if(empty($_GET['step']) || empty($_GET['key']) ||empty($_GET['gjcode']) ||empty($_GET['title']) ||empty($_GET['sname']) ||empty($_GET['edkey']) ||empty($_GET['email']) ){
-     echo '您可能漏填了某些东西，请返回检查！！！';
+     echo 'Please verify all required fields are filled.';
      echo '<div class="text-center padding-top">
-                    <button class="button bg-red padding-left margin-bottom" onclick="javascript:history.back(-1);">上一步</button>
+                    <button class="button bg-red padding-left margin-bottom" onclick="javascript:history.back(-1);">Next</button>
    
                 </div>';
                 exit();
@@ -82,9 +82,9 @@ $str.='?>';
 $fp=fopen('config.php',"w"); //写方式打开文件 
 $message=fwrite($fp,$str); //存入内容 
 if(!$message===false){
-    $sms='<div class="alert alert-green margin-top">	<span class="close rotate-hover padding-top"></span><strong>恭喜：</strong>本程序安装成功!</div>
-    <div class="margin-large text-center"><a href="./index.php" class="button bg-red ">进入首页</a></div>
-        <div class="alert alert-green margin-top">	<span class="close rotate-hover "></span><strong>提示:</strong>若程序无法正常工作，请编辑config.php文件查看的apiKey填写正确。或者检查config.php文件是否存在或者文件为空。</div>
+    $sms='<div class="alert alert-green margin-top">	<span class="close rotate-hover padding-top"></span><strong>Congratulations：</strong>Installation was successful!</div>
+    <div class="margin-large text-center"><a href="./index.php" class="button bg-red ">Go Home</a></div>
+        <div class="alert alert-green margin-top">	<span class="close rotate-hover "></span><strong>Tip:</strong>If you have an issue, check config.php exists and <mark>apikey</mark> is entered correctly.</div>
          
     </div>';
     unlink('./install.php');
