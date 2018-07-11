@@ -13,8 +13,8 @@ error_reporting( E_ALL&~E_NOTICE );
 <link href="//cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css" rel="stylesheet"> 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
 <script src="//cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.js"></script>
-<link href="//vjs.zencdn.net/7.0.5/video-js.css" rel="stylesheet" />
-<script src="//vjs.zencdn.net/7.0.5/video-js.js"></script>
+<link href="//cdn.bootcss.com/video.js/5.20.4/alt/video-js-cdn.min.css" rel="stylesheet" />
+<script src="//libs.cdnjs.net/video.js/5.20.4/video.min.js"></script>
 <script type="text/javascript" src="./inc/4.js"></script>
 <link rel="stylesheet" href="./inc/theme.css" type="text/css">
 <link rel="stylesheet" href="./inc/iconfont.css">
