@@ -1,5 +1,6 @@
 <?php
 error_reporting( E_ALL&~E_NOTICE );
+require_once "lang.conf.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,13 +39,13 @@ error_reporting( E_ALL&~E_NOTICE );
 		<script >
 $("#youtube").autocomplete({
     source: function(request, response){
-        
+
         var query = request.term;
-        
+
         $.ajax({
-            url: "./ajax/autocomplete.php?q="+query,  
+            url: "./ajax/autocomplete.php?q="+query,
             dataType: 'jsonp',
-            success: function(data, textStatus, request) { 
+            success: function(data, textStatus, request) {
                response( $.map( data[1], function(item) {
                     return {
                         label: item[0],
@@ -54,7 +55,7 @@ $("#youtube").autocomplete({
             }
         });
     },
-    
+
 });
 </script>
 		</div>

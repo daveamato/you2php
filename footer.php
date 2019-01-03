@@ -3,8 +3,8 @@
            <!--  -->
         </p>
     </footer>
-  
-  
+
+
   <script src="https://cdn.bootcss.com/popper.js/1.11.0/umd/popper.min.js"></script>
   <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://cdn.bootcss.com/Swiper/4.0.6/js/swiper.min.js"></script>  
@@ -25,12 +25,12 @@
     });
 });
 
- $(function () {  
-        var swiper = new Swiper('.swiper-container', {  
-            spaceBetween: 20,  
-            slidesPerView:'auto',  
-            freeMode: true  
-        });  
-    })  
+ $(function () {
+        var swiper = new Swiper('.swiper-container', {
+            spaceBetween: 20,
+            slidesPerView:'auto',
+            freeMode: true
+        });
+    })
 </script>
 </body></html>

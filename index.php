@@ -1,8 +1,10 @@
 <?php
 if(!file_exists('./config.php')){
       header('Location: ./install.php');
-      exit();   
+      exit();
 }
+require_once "lang.conf.php";
+
 include("./lib.php");
 $headtitle='Home'.'-'.SITE_NAME;
 include("./header.php");
@@ -20,15 +22,15 @@ if(isset($_GET['v'])){
 }
 ?>
 <div class="container-fluid d-lg-none  d-md-none" style="background:#e62117">
-    
+
   <div class="container p-1">
        <div class="row text-center p-1" >
         <div class="col-4"><a class="topbara" href="./"><i class="fa d-inline hico fa-home text-white"></i></a></div>
         <div class="col-4"><a class="topbara" href="./content.php?cont=trending"><i class="fa d-inline hico fa-fire txt-topbar"></i></a></div>
         <div class="col-4"><a class="topbara" href="./content.php?cont=history"><i class="fa d-inline hico fa-history txt-topbar"></i></a></div>
-  </div> 
-  
-  
+  </div>
+
+
 </div>
 </div>
 
@@ -37,41 +39,41 @@ if(isset($_GET['v'])){
 <div class="row ml-0 mr-0">
 
 
-<div class="topmenu w-100 px-2">  
-    <div class="swiper-container">  
+<div class="topmenu w-100 px-2">
+    <div class="swiper-container">
         <div class="swiper-wrapper">
             <?php
             echo '<span class="swiper-slide"><a href="./" class="text-primary">Home</a></span>';
             foreach (categorieslist('all') as $k => $val) {
-                echo '<span class="swiper-slide"><a href="./content.php?cont=category&sortid='.$k.'" class="text-dark">'.$val.'</a></span>';  
+                echo '<span class="swiper-slide"><a href="./content.php?cont=category&sortid='.$k.'" class="text-dark">'.$val.'</a></span>';
             }
             ?>
-            
-  
-            
-        </div>  
-    </div>  
-    
-</div>  
 
-  
+
+
+        </div>
+    </div>
+
+</div>
+
+
 </div></div>
 
 <div class="container d-lg-none d-md-none p-0">
-    
+
   <div id="lb" class="carousel slide" data-ride="carousel" width="100%">
  <?php
   $feedlist=random_recommend();
   $feed=array();
     foreach ($feedlist as $v) {
-      $feed[]=$v['dat'][0];  
+      $feed[]=$v['dat'][0];
     }
  echo ' <ul class="carousel-indicators">';
  for ($i = 1; $i < count($feed); $i++) {
       if($i == 1){
-      echo '<li data-target="#lb" data-slide-to="'.$i.'" class="active"></li>';   
+      echo '<li data-target="#lb" data-slide-to="'.$i.'" class="active"></li>';
       }else{
-       echo '<li data-target="#lb" data-slide-to="'.$i.'"></li>'; 
+       echo '<li data-target="#lb" data-slide-to="'.$i.'"></li>';
       }
  }
  echo '</ul>
@@ -86,7 +88,7 @@ if(isset($_GET['v'])){
       <div class="carousel-caption">
         <p class="my-0 text-white">'.$val['title'].'</p>
       </div>
-    </div>'; 
+    </div>';
     }else{
        echo '<div class="carousel-item">
         <a href="./watch.php?v='.$val['id'].'">
@@ -95,21 +97,21 @@ if(isset($_GET['v'])){
       <div class="carousel-caption text-truncate">
          <pclass="my-0 text-white">'.$val['title'].'</p>
       </div>
-    </div>'; 
+    </div>';
     }
  }
     echo '</div>';
  ?>
 
- 
 
- 
+
+
 </div>
-    
+
 </div>
 
   <div class="container py-2">
-      
+
     <div class="row">
       <div class="col-md-3 d-none d-sm-none d-md-block">
           <div id="menu"></div>
@@ -125,7 +127,7 @@ if(isset($_GET['v'])){
   </div>
     </form>
     </div>
-    
+
     <div class="row pt-2 pb-2">
     <div class="col-8 sm-p">
       <span class="txt2 ricon h5">Popular</span>
@@ -134,19 +136,19 @@ if(isset($_GET['v'])){
       <a href="./content.php?cont=trending" title="More" target="_blank" class="icontext h6 pl-1 ">More<i class="fa d-inline fa-lg fa-angle-double-right"></i></a>
     </div>
   </div>
-         
-          
-        
+
+
+
             <div id="videocontent" class="videocontentrow"></div>
             <div id="recommend" class="videocontentrow"></div>
     <script>
     $("#videocontent").load('./ajax/ajax.php?type=trending');
     $("#recommend").load('./ajax/ajax.php?type=recommend');
     </script>
-    
+
         </div>
     </div>
  </div>
 <?php
-include("./footer.php"); 
+include("./footer.php");
 ?>

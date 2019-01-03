@@ -1,4 +1,7 @@
 <?php
+
+require_once "lang.conf.php";
+
 header("HTTP/1.0 404 Not Found");
 $headtitle='ERROR！';
 include("./header.php");?>
@@ -15,10 +18,10 @@ include("./header.php");?>
 
   </div>
     </div>
-  
+
 </div>
 
 
 <?php
-include("./footer.php"); 
+include("./footer.php");
 ?>

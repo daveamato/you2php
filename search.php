@@ -1,4 +1,7 @@
 <?php
+
+require_once "lang.conf.php";
+
 if(!is_array($_GET)&&count($_GET)<=0){
        exit();
     }
@@ -10,13 +13,13 @@ $order1=$order;
 $q=urlencode($_GET["q"]);
 $type=isset($_GET['type'])?$_GET['type']:'video';
 if($type=='channel'){
-$order1='channel'; 
+$order1='channel';
 }
 ?>
   <div class="container">
       <div class="py-2">
     <div class="row">
-     
+
       <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
           
           <span class="txt2 pt-1 pb-1" style="text-align: center;display:block;">Search:<?php echo $_GET["q"] ?></span>
@@ -42,9 +45,9 @@ $order1='channel';
         ?>
           </select></div></div>
          <div id="videocontent" class="pt-2 videocontentrow"></div>
-        
-            
-        
+
+
+
        </div>
 <script>
     $("#videocontent").load('<?php echo './ajax/ajax.php?q='.$q.'&type='.$type.'&order='.$order.'&ptk='.$_GET['pageToken']?>');
@@ -59,5 +62,5 @@ $order1='channel';
  </div> </div>
 
  <?php
-include("./footer.php"); 
+include("./footer.php");
 ?>

@@ -1,4 +1,7 @@
 <?php
+
+require_once "lang.conf.php";
+
 /**
  * ChowderTube
  * @author ch0wder
@@ -22,7 +25,7 @@ require_once(dirname(__FILE__).'/YouTubeDownloader.php');
 		$f = curl_exec($ch);
 		curl_close($ch);
 	}
-   return $f;  
+   return $f;
 }
 
 function get_trending($apikey,$max,$pageToken='',$regionCode='US'){
@@ -58,7 +61,6 @@ function videoCategories($apikey,$regionCode='US'){
    $apilink='https://www.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode='.$regionCode.'&hl=en-US&key='.$apikey;
    return json_decode(get_data($apilink),true);
 }
-
 
 function categorieslist($id){
    $data=array(
@@ -111,16 +113,15 @@ function get_search_video($query,$apikey,$pageToken='',$type='video',$order='rel
 }
 
 function covtime($youtube_time){
-    $start = new DateTime('@0'); 
+    $start = new DateTime('@0');
     $start->add(new DateInterval($youtube_time));
     if(strlen($youtube_time)<=7){
-      return $start->format('i:s');  
+      return $start->format('i:s');
     }else{
-     return $start->format('H:i:s');   
+     return $start->format('H:i:s');
     }
-    
-}
 
+}
 
 function format_date($time){
     $t=strtotime($time);
@@ -148,13 +149,13 @@ function str2time($ts) {
 
 function convertviewCount($value){
     if($value <= 10000){
-    $number = $value;   
+    $number = $value;
     }else{
-      $number = $value / 1000 ; 
+      $number = $value / 1000 ;
       $number = round($number,1).'K';
-      
+
     }
-    
+
     return $number;
 }
 
@@ -162,19 +163,18 @@ function get_banner($a,$apikey){
    $apilink='https://www.googleapis.com/youtube/v3/channels?part=brandingSettings&id='.$a.'&key='.$apikey;
    $json=json_decode(get_data($apilink),true);
   if (array_key_exists('bannerTabletImageUrl',$json['items'][0]['brandingSettings']['image'])){
-  return $json['items'][0]['brandingSettings']['image']['bannerTabletImageUrl'];    
+  return $json['items'][0]['brandingSettings']['image']['bannerTabletImageUrl'];
  }else{
-  return 'https://c1.staticflickr.com/5/4546/24706755178_66c375d5ba_h.jpg';   
+  return 'https://c1.staticflickr.com/5/4546/24706755178_66c375d5ba_h.jpg';
  }
 }
 $videotype=array(
     '3GP144P' => array('3GP','144P','3gpp'),
-    '360P' => array('MP4','360P','mp4'), 
-    '720P' => array('MP4','720P','mp4'), 
-    'WebM360P' => array('webM','360P','webm'), 
-    'Unknown' => array('N/A','N/A','3gpp'), 
+    '360P' => array('MP4','360P','mp4'),
+    '720P' => array('MP4','720P','mp4'),
+    'WebM360P' => array('webM','360P','webm'),
+    'Unknown' => array('N/A','N/A','3gpp'),
     );
-
 
 require_once(dirname(__FILE__).'/inc/phpQuery.php');
 require_once(dirname(__FILE__).'/inc/QueryList.php');
@@ -203,7 +203,7 @@ function random_recommend(){
         );
 
     $data = QueryList::Query($dat,$rules)->data;
-    
+
     $ldata=array();
     foreach ($data as $v) {
        $d = QueryList::Query($v['html'],$rules1)->data;
@@ -230,18 +230,18 @@ foreach ($links as $value) {
     global $videotype;
 echo ' <tbody>
     <tr>
-      
+
       <td>'.$videotype[$value['format']][0].'</td>
       <td>'.$videotype[$value['format']][1].'</td>
       <td><a href="./downvideo.php?v='.$v.'&quality='.$value['format'].'&name='.$name.'&format='.$videotype[$value['format']][2].'" target="_blank" class="btn btn-outline-success btn-sm">Download</a></td>
     </tr></tbody>';
-    } 
+    }
     echo '</table>';
 }
 
 
 function get_thumbnail_code($vid){
-$thumblink='https://img.youtube.com/vi/'.$vid.'/maxresdefault.jpg';    
+$thumblink='https://img.youtube.com/vi/'.$vid.'/maxresdefault.jpg';
 $oCurl = curl_init();
 $header[] = "Content-type: application/x-www-form-urlencoded";
 $user_agent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.146 Safari/537.36";
@@ -256,9 +256,9 @@ $sContent = curl_exec($oCurl);
 $headerSize = curl_getinfo($oCurl, CURLINFO_HTTP_CODE);
 curl_close($oCurl);
 if($headerSize == '404'){
-  return 'https://img.youtube.com/vi/'.$vid.'/hqdefault.jpg';  
+  return 'https://img.youtube.com/vi/'.$vid.'/hqdefault.jpg';
 }else{
-  return 'https://img.youtube.com/vi/'.$vid.'/maxresdefault.jpg';   
+  return 'https://img.youtube.com/vi/'.$vid.'/maxresdefault.jpg';
 }
 }
 
@@ -266,7 +266,7 @@ if($headerSize == '404'){
 function Hislist($str,$apikey){
     $str=str_replace('@',',',$str);
     $apilink='https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id='.$str.'&key='.$apikey;
-   return json_decode(get_data($apilink),true);   
+   return json_decode(get_data($apilink),true);
 }
 
 
@@ -430,14 +430,10 @@ function html5_player($id){
     $links = $yt->getDownloadLinks('https://www.youtube.com/watch?v='.$id);
     if(count($links)!=1){
         echo'<video id="h5player"  class="video-js vjs-fluid mh-100 mw-100" loop="loop" width="100%" preload="auto"  webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" controls="controls" controls preload="auto" width="100%" poster="./thumbnail.php?type=maxresdefault&vid='.$id.'" data-setup=\'\'>';
-        
-        
         if(array_key_exists('22',$links)){
-        echo '<source src="./vs.php?vv='.$id.'&quality=720" type=\'video/mp4\' res="720" label=\'720P\'/>';   
+        echo '<source src="./vs.php?vv='.$id.'&quality=720" type=\'video/mp4\' res="720" label=\'720P\'/>';
             };
         echo '<source src="./vs.php?vv='.$id.'&quality=360" type=\'video/mp4\' res="360" label=\'360P\'/>';
-        
-
      $slink='https://www.youtube.com/api/timedtext?type=list&v='.$id;
      $vdata=get_data($slink);
      @$xml = simplexml_load_string($vdata);
@@ -467,13 +463,13 @@ function html5_player($id){
       }
     }
      }elseif(array_key_exists('track',$array1)){
-     echo "<track kind='captions' src='./tracks.php?vtt={$id}&lang=".$array1['track']['@attributes']['lang_code']."' srclang='".$array1['code']."' label='".$array1['track']['@attributes']['lang_original']."' default />";   
+     echo "<track kind='captions' src='./tracks.php?vtt={$id}&lang=".$array1['track']['@attributes']['lang_code']."' srclang='".$array1['code']."' label='".$array1['track']['@attributes']['lang_original']."' default />";
      }
 
     echo '</video>';
     }else{
-        echo '<img src="./inc/2.svg" class="w-100" onerror="this.onerror=null; this.src="./inc/2.gif"">';       
-        }   
+        echo '<img src="./inc/2.svg" class="w-100" onerror="this.onerror=null; this.src="./inc/2.gif"">';
+        }
 }
 
 
