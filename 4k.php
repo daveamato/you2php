@@ -517,7 +517,7 @@ if (stripos($contentType, "text/html") !== false) {
 
   }
 
-  echo "<!-- Proxified page constructed by miniProxy -->\n" . $doc->saveHTML();
+  echo "<!-- Proxified for ChowderTube -->\n" . $doc->saveHTML();
 } else if (stripos($contentType, "text/css") !== false) { //This is CSS, so proxify url() references.
   echo proxifyCSS($responseBody, $url);
 } else { //This isn't a web page or CSS, so serve unmodified through the proxy with the correct headers (images, JavaScript, etc.)
