@@ -2,7 +2,6 @@
 
 $Lang="en";
 
-/////////////////////////////////////////////////////
 if(isset($Lang) and $Lang!==''){
   $lang_file = 'lang.'.$Lang.'.php';
 }else{
@@ -10,5 +9,5 @@ if(isset($Lang) and $Lang!==''){
 }
 
   include_once 'lang/'.$lang_file;
-/////////////////////////////////////////////////////
+
 ?>
