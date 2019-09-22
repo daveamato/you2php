@@ -7,7 +7,7 @@ $lang = array();
 
 //////////////// IMPORTANT ! /////////
 /**/  $lang['LANGTYPE'] = 'en';   /**/
-/**/  $lang['YT_LANG'] = 'en';   /**/
+/**/  $lang['YT_LANG'] = 'en-US';   /**/
 //////////////////////////////////////
 
 //////////////// SEARCH PAGE ////////////////
@@ -15,7 +15,7 @@ $lang['WATCH_M1']  =  "This person is very lazy, the introduction is not written
 $lang['WATCH_CAT']  =  "Category";
 $lang['WATCH_SHARE']  =  "Share it";
 $lang['WATCH_DOWN']  =  "Download";
-$lang['WATCH_4KPB']  =  "4K playback";
+$lang['WATCH_4KPB']  =  "4K";
 $lang['WATCH_HOMEPAGE']  =  "Homepage";
 $lang['WATCH_RINF']  =  "Related information";
 
@@ -23,7 +23,7 @@ $lang['WATCH_RINF']  =  "Related information";
 $lang['INDEX_HTITLE']  =  "Home";
 $lang['INDEX_HOME']  =  "Home";
 $lang['INDEX_M1']  =  "Hello world!";
-$lang['INDEX_PL1']  =  "Enter Youtube video ID or link";
+$lang['INDEX_PL1']  =  "Enter video ID or link";
 $lang['INDEX_PLAY']  =  "Play";
 $lang['INDEX_P_M1']  =  "Socialist core values:";
 $lang['INDEX_P_M2']  =  "Rich, strong, democratic, civilized, harmonious";
@@ -76,15 +76,15 @@ $lang['LIB_SHAREIT_SC'] = "Sharing code:";
 $lang['LIB_SHAREIT_SCOPY'] = "copy";
 
 //////////////// HEADER PAGE ////////////////
-$lang['HEADER_KEYWORDS'] = "Youtube, Youtube Mirror, Youtube Express, Youtube Mirror Site, Youtube Video Agent, Youtube Online Video";
-$lang['HEADER_DESCRIPTION'] = "Youtube image";
-$lang['HEADER_SEARCH'] = "Search Youtube";
+$lang['HEADER_KEYWORDS'] = "chowder tube";
+$lang['HEADER_DESCRIPTION'] = "for private use";
+$lang['HEADER_SEARCH'] = "Search...";
 
 //////////////// FOOTER PAGE ////////////////
-$lang['FOOTER_CUPD'] = "Check for updates";
+$lang['FOOTER_CUPD'] = "Updates";
 
 //////////////// ERROR PAGE ////////////////
-$lang['ERROR_HTITLE'] = "Error message!";
+$lang['ERROR_HTITLE'] = "Error :(";
 $lang['ERROR_T'] = "The requested content does not exist!";
 $lang['ERROR_M1'] = "Sorry, the content you requested was not rendered!";
 $lang['ERROR_M2'] = "Possible reason:";
@@ -94,24 +94,24 @@ $lang['ERROR_M5'] = "3. The video does not exist.";
 $lang['ERROR_M6'] = "4. Website server error.";
 
 //////////////// CONTENT PAGE ////////////////
-$lang['CONTENT_T_HIST'] = "History - oil drum";
-$lang['CONTENT_T_TREND'] = "Popular nowadays";
+$lang['CONTENT_T_HIST'] = "History";
+$lang['CONTENT_T_TREND'] = "Popular";
 $lang['CONTENT_T_DMCA'] = "DMCA";
 $lang['CONTENT_T_VID'] = "Video download tool";
-$lang['CONTENT_T_API'] = "API oil drum";
-$lang['CONTENT_OPT1'] = "Popular video";
-$lang['CONTENT_OPT2'] = "Latest release";
-$lang['CONTENT_OPT3'] = "Most clicks";
+$lang['CONTENT_T_API'] = "API";
+$lang['CONTENT_OPT1'] = "Popular";
+$lang['CONTENT_OPT2'] = "Latest";
+$lang['CONTENT_OPT3'] = "Featured";
 
 //////////////// CHANNEL PAGE ////////////////
-$lang['CHANNEL_M1'] = "This guy is lazy, nothing left...";
-$lang['CHANNEL_M2'] = "Channel information";
+$lang['CHANNEL_M1'] = "No description available";
+$lang['CHANNEL_M2'] = "Channel";
 $lang['CHANNEL_M3'] = "Registered at";
 $lang['CHANNEL_M4'] = "Watch";
 $lang['CHANNEL_M5'] = "Subscriber";
 $lang['CHANNEL_M6'] = "From";
 $lang['CHANNEL_M6B'] = "Mars";
-$lang['CHANNEL_M7'] = "Related channel";
+$lang['CHANNEL_M7'] = "Related";
 $lang['CHANNEL_M8'] = "All videos (";
 
 //////////////// UPGRADE PAGE ////////////////
@@ -124,7 +124,7 @@ $lang['UPGRADE_M5']  = "Update content:";
 $lang['UPGRADE_OK']  = "This program is already the latest version, no need to upgrade!";
 
 //////////////// AJAX PAGE ////////////////
-$lang['AJAX_ERR1']  = "Sorry, didn't find it with";
+$lang['AJAX_ERR1']  = "No results found!";
 $lang['AJAX_ERR2']  = "Failed to get content! This channel user has not uploaded any content, or the channel content is protected by copyright and cannot be viewed temporarily!";
 $lang['AJAX_ERR3']  = "Illegal request";
 $lang['AJAX_SORRY']  = "Sorry!";
@@ -133,18 +133,18 @@ $lang['AJAX_TEXT1']  = "Related videos";
 $lang['AJAX_PREVIOUS']  = "Previous";
 $lang['AJAX_NEXT']  = "Next";
 $lang['AJAX_BTN1']  = "Home";
-$lang['AJAX_BTN2']  = "Popular nowadays";
-$lang['AJAX_BTN3']  = "History record";
+$lang['AJAX_BTN2']  = "Popular";
+$lang['AJAX_BTN3']  = "History";
 $lang['AJAX_BTN4']  = "DMCA";
-$lang['AJAX_BTN5']  = "Video download";
+$lang['AJAX_BTN5']  = "Download";
 $lang['AJAX_BTN6']  = "API";
-$lang['AJAX_T1']  = "YOUTUBE Featured";
+$lang['AJAX_T1']  = "Featured";
 $lang['AJAX_DMCA_DIS']  = "DMCA and Disclaimer";
 $lang['AJAX_DMCA_B']  = "DMCA：";
 $lang['AJAX_DMCA_M1']  = "This site video content from the Internet.";
 $lang['AJAX_DMCA_M2']  = "If inadvertently violate your copyright.";
-$lang['AJAX_DMCA_M3']  = "Send copyright complaints to";
-$lang['AJAX_DMCA_M4']  = "We will response within 48 hours!";
+$lang['AJAX_DMCA_M3']  = "Send copyright complaints to YouTube and not ";
+$lang['AJAX_DMCA_M4']  = "They should respond within 48 hours!";
 $lang['AJAX_USER_NOTICE']  = "User notice:";
 $lang['AJAX_USER_NOTICE_M1']  = "Please read the following terms carefully. If you disagree with any of the terms of this agreement, you may choose not to use this website. By browsing this site, whether you intend to browse or not intend to browse, you are fully accepting all the terms of this agreement.";
 $lang['AJAX_USER_NOTICE_M2']  = "1. In view of the non-manual retrieval method of the site, the content of the content you requested belongs to the content of the third-party site, you may obtain information and enjoy the service from the website of the first site, but this site is not responsible for the legality of its content, nor does it undertake Any legal liability.";
