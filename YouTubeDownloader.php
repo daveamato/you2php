@@ -6,7 +6,7 @@ function sig_js_decode($player_html){
 	// what javascript function is responsible for signature decryption?
 	// var l=f.sig||Xn(f.s)
 	// a.set("signature",Xn(c));return a
-	if(preg_match('/signature",([a-zA-Z0-9$]+)\(/', $player_html, $matches)){
+	if(preg_match("@(?:\.sig\|\||\.set\(\"signature\",|\|\"signature\",|$v\.sp,|$v=)(?:\(0,$v(?:\.$v)*\)\(|$v3\()?($v)\((?:\(0,$v(?:\.$v)*\)\(|$v3\()?$v\.s\)@", $player_html, $matches)){
 		
 		$func_name = $matches[1];		
 		$func_name = preg_quote($func_name);
@@ -14,7 +14,7 @@ function sig_js_decode($player_html){
 		// extract code block from that function
 		// single quote in case function name contains $dollar sign
 		// xm=function(a){a=a.split("");wm.zO(a,47);wm.vY(a,1);wm.z9(a,68);wm.zO(a,21);wm.z9(a,34);wm.zO(a,16);wm.z9(a,41);return a.join("")};
-		if(preg_match('/'.$func_name.'=function\([a-z]+\){(.*?)}/', $player_html, $matches)){
+		if(preg_match("@(?:function\s+$fn\s*\(|var\s+$fn\s*=\s*function\s*\(|(?<=(?:{|,|;))\s*$fn\s*=\s*function\s*\()@", $player_html, $matches)){
 			
 			$js_code = $matches[1];
 			
