@@ -224,6 +224,12 @@ echo '<a href="'.$stream['url'].'">Download</a> '.quality($stream["itag"]).'</br
 foreach ($streamin_data_json["streamingData"]["adaptiveFormats"] as $stream) {
 if (isset($stream["cipher"])) {
     parse_str($stream["cipher"],$dturl);
+    if(quality($stream["itag"]) == "480P") {
+        $LocationUrl = $dturl['url'].'&sig='.sig($dturl['s']);
+    header("Location: $LocationUrl");
+    exit();
+    }
+    
  echo '<a href="'.$dturl['url'].'&sig='.sig($dturl['s']).'">Download</a> '.quality($stream["itag"]).'</br>';
 }else{
 echo '<a href="'.$stream['url'].'">Download</a> '.quality($stream["itag"]).'</br>';
