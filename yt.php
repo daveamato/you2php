@@ -230,10 +230,10 @@ if (isset($stream["cipher"])) {
     exit();
     }
     
- echo '<a href="'.$dturl['url'].'&sig='.sig($dturl['s']).'">Download</a> '.quality($stream["itag"]).'</br>';
-}else{
-echo '<a href="'.$stream['url'].'">Download</a> '.quality($stream["itag"]).'</br>';
-}
+ //echo '<a href="'.$dturl['url'].'&sig='.sig($dturl['s']).'">Download</a> '.quality($stream["itag"]).'</br>';
+//}else{
+//echo '<a href="'.$stream['url'].'">Download</a> '.quality($stream["itag"]).'</br>';
+//}
   
  
 }
