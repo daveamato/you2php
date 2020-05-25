@@ -1,6 +1,6 @@
 <?php
 define('ROOT_PART', Root_part());
-define('APIKEY', 'AIzaSyAtVoFXulg-stpH878Sbs_OWrKdTOeE5bE');
+define('APIKEY', 'AIzaSyAAJolT5_LZmX3DhNEd1atd_WGj_ZE-8XQ');
 define('GJ_CODE', 'US');
 define('SITE_NAME', 'ChowderTube');
 define('TITLENAME', 'ChowderTube');

@@ -1,135 +1,250 @@
 <?php
-@error_reporting(E_ALL&~E_NOTICE&~E_WARNING);
-@ignore_user_abort(0);
-@set_time_limit(0);
-include_once('./YouTubeDownloader.php');
+if (file_exists('sig1.php')) {
+    unlink('sig1.php');
+}
+function quality($itag) {
+        switch ($itag) {
+            case "17":
+                return "144P";
+                break;
+            case "278":
+                return "144P";
+                break;
+            case "36":
+                return "240P";
+                break;
+            case "242":
+                return "240P";
+                break;
+            case "18":
+                return "360P";
+                break;
+            case "243":
+                return "360P";
+                break;
+            case "43":
+                return "360P";
+                break;
+            case "35":
+                return "480P";
+                break;
+            case "44":
+                return "480P";
+                break;
+            case "135":
+                return "<img src='https://i.imgur.com/sAiZdSr.png'></img> 480P";
+                break;
+            case "244":
+                return "480P";
+                break;
+            case "22":
+                return "720P";
+                break;
+            case "136":
+                return "720P";
+                break;
+            case "247":
+                return "720P";
+                break;
+            case "137":
+                return "1080P";
+                break;
+            case "248":
+                return "1080P";
+                break;
+            case "299":
+                return "1080P (60 FPS)";
+                break;
+            case "138":
+                return "2K";
+                break;
+            case "264":
+                return "2K";
+                break;
+            case "271":
+                return "2K";
+                break;
+            case "266":
+                return "4K";
+                break;
+            case "313":
+                return "4K (60 FPS)";
+                break;
+            case "139":
+                return "<img src='https://i.imgur.com/H6TF3Sc.png'></img> 48 Kbps";
+                break;
+            case "140":
+                return "<img src='https://i.imgur.com/cYJzY9F.png'></img> 128 Kbps";
+                break;
+            case "141":
+                return "<img src='https://i.imgur.com/cYJzY9F.png'></img> 128 Kbps";
+                break;              
+            case "171":
+                return "<img src='https://i.imgur.com/H6TF3Sc.png'></img> 128 Kbps";
+                break;
+            case "249":
+                return "<img src='https://i.imgur.com/sAiZdSr.png'></img> 50k";
+                break;
+            case "250":
+                return "<img src='https://i.imgur.com/H6TF3Sc.png'></img> 70k";
+                break;
+            case "251":
+                return "<img src='https://i.imgur.com/H6TF3Sc.png'></img> 160k";
+                break;              
+            default:
+                return $itag;
+                break;
+        }
+    } 
+if (isset($_GET['vv'])) {
+    $id=$_GET['vv'];
+ 
+}else{
+    echo 'no url';
+}
 
-function strencode($string,$key='09KxDsIIe|+]8Fo{YP<l+3!y#>a$;^PzFpsxS9&d;!l;~M>2?N7G}`@?UJ@{FDI') {
-    $key = sha1($key);
-    $strLen = strlen($string);
-    $keyLen = strlen($key);
-    for ($i = 0; $i < $strLen; $i++) {
-        $ordStr = ord(substr($string,$i,1));
-        if (@$j == $keyLen) { $j = 0; }
-        $ordKey = ord(substr($key,$j,1));
-        @$j++;
-    @$hash .= strrev(base_convert(dechex($ordStr + $ordKey),16,36));
-    }
-    return 'Urls://'.$hash;
-}
-function strdecode($string,$key='09KxDsIIe|+]8Fo{YP<l+3!y#>a$;^PzFpsxS9&d;!l;~M>2?N7G}`@?UJ@{FDI') {
-    $string= ltrim($string, 'Urls://');
-    $key = sha1($key);
-    $strLen = strlen($string);
-    $keyLen = strlen($key);
-    for ($i = 0; $i < $strLen; $i+=2) {
-        $ordStr = hexdec(base_convert(strrev(substr($string,$i,2)),36,16));
-        if (@$j == $keyLen) { @$j = 0; }
-        $ordKey = ord(substr($key,@$j,1));
-        @$j++;
-        @$hash .= chr($ordStr - $ordKey);
-    }
-    return $hash;
-}
+$a= file_get_contents('https://www.youtube.com/embed/'.$id);
 
-$yt=new YouTubeDownloader();
-$u="https://www.youtube.com/watch?v=".$_GET['vv'];
-$links=$yt->getDownloadLinks($u);
-if($_GET['quality']=='720'){
-	$file_path=$links['22']['url'];
+$ccc=explode('jsbin/player_ias', $a);
+$ddd=explode('/', $ccc[1]);
+$jdl=explode('<title>', $a);
+$jdl=explode('</title>', $jdl[1]);
+$judul=$jdl[0];
+
+
+
+function getchiper($decipherScript){
+        $decipherPatterns = explode('.split("")', $decipherScript);
+        unset($decipherPatterns[0]);
+        foreach ($decipherPatterns as $value) {
+            $value = explode('.join("")', explode('}', $value)[0]);
+            if (count($value) === 2) {
+                $value = explode(';', $value[0]);
+                array_pop($value);
+                unset($value[0]);
+                $decipherPatterns = implode(';', $value);
+                break;
+            }
+        }
+        preg_match_all('/(?<=;).*?(?=\[|\.)/', $decipherPatterns, $deciphers);
+        if ($deciphers && count($deciphers[0]) >= 2) {
+            $deciphers = $deciphers[0][0];
+        $deciphersObjectVar = $decipherPatterns ;
+        $decipher = explode($deciphers . '={', $decipherScript)[1];
+        $decipher = str_replace(["\n", "\r"], '', $decipher);
+        $decipher = explode('}};', $decipher)[0];
+        $decipher = explode('},', $decipher);
+        // Convert deciphers to object
+        $deciphers = [];
+
+        foreach ($decipher as &$function) {
+            $deciphers[explode(':function', $function)[0]] = explode('){', $function)[1];
+        }
+        // Convert pattern to array
+        $decipherPatterns = str_replace($deciphersObjectVar . '.', '', $decipherPatterns);
+        $decipherPatterns = str_replace($deciphersObjectVar . '[', '', $decipherPatterns);
+        $decipherPatterns = str_replace(['](a,', '(a,'], '->(', $decipherPatterns);
+        $decipherPatterns = explode(';', $decipherPatterns);
+        $patterns =$decipherPatterns;
+            $deciphers =$deciphers; 
+        for ($i=0; $i < count($patterns); $i++) {
+            $executes = explode('->', $patterns[$i]);
+            $execute=explode('.', $executes[0]);
+            $number = intval(str_replace(['(', ')'], '', $executes[1]));
+            $execute = $deciphers[$execute[1]];
+            switch ($execute) {
+                case 'a.reverse()':
+                    $processSignature = '$reverse';
+                break;
+                case 'var c=a[0];a[0]=a[b%a.length];a[b]=c':   
+                    $processSignature= '$length';
+                break;
+                case 'var c=a[0];a[0]=a[b%a.length];a[b%a.length]=c':
+                $processSignature= '$lengtha';
+                break;
+                case 'a.splice(0,b)':
+                    $processSignature= '$splice';
+                break;
+                default:
+                    die("\n==== Decipher dictionary was not found ====");
+
+                break;
+            }
+        $myfile = fopen("sig1.php", "a+") or die("Unable to open file!");
+        if ($i==0) {
+            fwrite($myfile, '<?php $a = str_split($s);');
+        }
+        fwrite($myfile, $processSignature.'($a,'.$number.');');
+        fclose($myfile);
+        }
+        }
+        }
+
+        function sig($s){
+        $reverse=function(&$a){
+                $a = array_reverse($a);
+            };
+            $splice=function(&$a, $b){
+                 $a = array_slice($a, $b);
+            };
+            $length = function(&$a, $b){
+                $c = $a[0];
+                $a[0] = $a[$b % count($a)];
+                $a[$b] = $c;
+            };
+            $lengtha = function(&$a, $b){
+                $c = $a[0];
+        $a[0] = $a[$b%count($a)];
+        $a[$b%count($a)] = $c;
+            };
+
+            
+        include('sig1.php');
+        return join('',$a);
+        }
+
+$gsts= file_get_contents('https://www.youtube.com/yts/jsbin/player_ias'.$ddd[0].'/en_US/base.js');
+getchiper($gsts);
+$data = file_get_contents("https://www.youtube.com/get_video_info?video_id=".$id."&asv=3&el=detailpage&hl=en_US");
+parse_str($data,$info);
+    $streams = $info['player_response']; 
+        $jsn_str=str_replace("\u0026","&",$streams);
+        $streamin_data_json=json_decode($jsn_str, true);
+$stream=$streamin_data_json["streamingData"]["formats"][0];
+
+/*
+if (isset($stream["cipher"])) {
+    parse_str($stream["cipher"],$dturl);
+ echo '<a href="'.$dturl['url'].'&sig='.sig($dturl['s']).'">Download</a> '.quality($stream["itag"]).'</br>';
+}else{
+echo '<a href="'.$stream['url'].'">Download</a> '.quality($stream["itag"]).'</br>';
 }
-elseif(isset($_GET["uhash"])){
-	$file_path=strdecode($_GET["uhash"],'vEeUq6O}$HTX9$O');
+*/
+if (isset($stream["cipher"])) {
+	    parse_str($stream["cipher"],$dturl);
+	    $surl = $stream['url'].'&sig='.sig($dturl['s']);
+	    
+		}else{
+			$surl = $stream['url'];
+		} 
+header("Location: $surl");
+exit();
+/*
+foreach ($streamin_data_json["streamingData"]["adaptiveFormats"] as $stream) {
+
+	if(quality($stream["itag"]) == "480P") {
+		if (isset($stream["cipher"])) {
+	    parse_str($stream["cipher"],$dturl);
+	    $surl = $stream['url'].'&sig='.sig($dturl['s']);
+	    
+		}else{
+			$surl = $stream['url'];
+		} 
+   
+    header("Location: $surl");
+    exit();
+  }
 }
-else{
-	$file_path=$links['18']['url'];
-}
-$url=trim($file_path);
-$urlArgs=parse_url($url);
-$host=$urlArgs['host'];
-$requestUri=$urlArgs['path'];
-if(isset($urlArgs['query'])){
-	$requestUri.='?'.$urlArgs['query'];
-}
-$protocol=($urlArgs['scheme']=='http')?'tcp':
-'ssl';
-$port=$urlArgs['port'];
-if(empty($port)){
-	$port=($protocol=='tcp')?80:
-	443;
-}
-$header="{$_SERVER['REQUEST_METHOD']} {$requestUri} HTTP/1.1\r\nHost: {$host}\r\n";
-unset($_SERVER['HTTP_HOST']);
-$_SERVER['HTTP_CONNECTION']='close';
-if($_SERVER['CONTENT_TYPE']){
-	$_SERVER['HTTP_CONTENT_TYPE']=$_SERVER['CONTENT_TYPE'];
-}
-foreach($_SERVER as $x=>$v){
-	if(substr($x,0,5)!=='HTTP_'){
-		continue;
-	}
-	$x=strtr(ucwords(strtr(strtolower(substr($x,5)),'_',' ')),' ','-');
-	$header.="{$x}: {$v}\r\n";
-}
-$header.="\r\n";
-$remote="{$protocol}://{$host}:{$port}";
-$context=stream_context_create();
-stream_context_set_option($context,'ssl','verify_host',false);
-$p=stream_socket_client($remote,$err,$errstr,60,STREAM_CLIENT_CONNECT,$context);
-if(!$p){
-	exit ;
-}
-fwrite($p,$header);
-$pp=fopen('php://input','r');
-while($pp && !feof($pp)){
-	fwrite($p,fread($pp,1024));
-}
-fclose($pp);
-$header='';
-$x=0;
-$len=false;
-$off=0;
-while(!feof($p)){
-	if($x==0){
-		$header.=fread($p,1024);
-		if(($i=strpos($header,"\r\n\r\n"))!==false){
-			$x=1;
-			$n=substr($header,$i+4);
-			$header=substr($header,0,$i);
-			$header=explode(PHP_EOL,$header);
-			foreach($header as $m){
-				if(stripos($m,'302')!==FALSE){
-					continue;
-				}
-				if(stripos($m,'Location')!==FALSE){
-					$LocationUrl=ltrim($m,"Location: ");
-					$LocationUrl='./vs.php?uhash='.strencode($LocationUrl,'vEeUq6O}$HTX9$O');
-					header("Location: $LocationUrl");
-					exit();
-					continue;
-				}
-				if(preg_match('!^\\s*content-length\\s*:!is',$m)){
-					$len=trim(substr($m,15));
-				}
-				header($m);
-			}
-			$fname=$_GET['vv'].'.mp4';
-			header("Content-Disposition: attachment;filename=\"$fname\"");
-			$off=strlen($n);
-			echo $n;
-			flush();
-		}
-	}
-	else{
-		if($len!==false && $off>=$len){
-		break;
-	}
-	$n=fread($p,1024);
-	$off+=strlen($n);
-	echo $n;
-	flush();
-}
-}
-fclose($p);
-return ;
+*/
+
 ?>

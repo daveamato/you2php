@@ -1,18 +1,12 @@
 <?php
 ini_set('display_errors', '0');
-//把下面的资料改成您的
 
-//网站名字
-$siteName='天天看视频';
+$siteName='ChowderTube';
 
 //youtube API V3 KEY:
 
 $key='*******************************************';
 
-
-//其他地方不用改。
-
-//若不懂,请勿修改下面的代码以免造成程序出错
 $header='
 <html>
     <head>
@@ -162,7 +156,7 @@ $header='
            <img src="'.Root_part().'2.png" alt="logo" style="height:35px;margin: 10px 0" />
         </div>';
 $footer='<footer class="w3-container w3-red w3-center" style="width: 100%;bottom: 0px;">
-            <p>©Development by <a href="https://2tube.js.org/" target="_blank">YOU2PHP</a></p>
+            <p>©<a href="#">ch0wder</a></p>
         </footer>
         </body>
 </html>';
@@ -173,7 +167,7 @@ switch (@$_SERVER['PATH_INFO']) {
     case '/watch':
        echo $header;
        echo '<div class="w3-container w3-center tj"><div class="w3-panel w3-pale-yellow w3-topbar w3-bottombar w3-border-yellow">
-    <p>不能观看请刷新,多试几次，若页面一直处于加载状态，可手动停止！</p>
+    <p>Please try again!</p>
   </div></div>';
        echo '<div class="w3-container w3-center bfq">
             <iframe width="100%" height="100%" src="../Proxy.php?https://www.youtube.com/embed/'.trim($_SERVER[QUERY_STRING]).'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -188,7 +182,7 @@ switch (@$_SERVER['PATH_INFO']) {
         $data='';
         $videodata=get_search_video(urlencode($_GET['q']),$key,'video','relevance','tw',$_GET['pid']);
        foreach ($videodata["items"] as $v) {
-            $data.='<a href="'.Root_part().'index.php/watch?'.$v["id"]["videoId"].'" ><div class="Media"><div class="Media-body"><h3 class="Media-title">'.$v["snippet"]["title"].'</h3></div><img class="Media-figure Image" src="'.Root_part().'Proxy.php?img.youtube.com/vi/'.$v["id"]["videoId"].'/mqdefault.jpg"></div></a>';
+            $data.='<a href="'.Root_part().'watch.php?'.$v["id"]["videoId"].'" ><div class="Media"><div class="Media-body"><h3 class="Media-title">'.$v["snippet"]["title"].'</h3></div><img class="Media-figure Image" src="'.Root_part().'Proxy.php?img.youtube.com/vi/'.$v["id"]["videoId"].'/mqdefault.jpg"></div></a>';
         }
         if(!array_key_exists("nextPageToken",$videodata) && array_key_exists("prevPageToken",$videodata)){
             $pid='null';
@@ -205,13 +199,13 @@ switch (@$_SERVER['PATH_INFO']) {
         if(isset($_GET['q'])){
     if(stripos($_GET['q'],'youtu.be')!==false || stripos($_GET['q'],'watch?v=')!==false ){
      preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $_GET['q'], $matches);
-    $str='../index.php/watch?'.$matches[1];
+    $str='../watch.php?'.$matches[1];
      header("Location:$str");
      exit();}}
         echo $header;
          $q=urlencode($_GET['q']);
          echo '<div class="w3-container w3-center tj" style="min-height:600px;">
-         <h4><b class="w3-opacity">'.$_GET['q'].'</b> 搜索结果</h4>
+         <h4><b class="w3-opacity">'.$_GET['q'].'</b>Results</h4>
                <div id="load_data"></div>
                <div id="load_data_message"></div>
                <div id="ajax-load" style="display:none">
@@ -227,7 +221,7 @@ echo '<script>
     var action = \'inactive\';
     function load_country_data(q, pid) {
         $.ajax({
-            url: "../index.php/searchdata",
+            url: "../search.php",
             type: "GET",
             data: "q=" + q + "&pid=" + pid,
             dataType: "json",
@@ -239,7 +233,7 @@ echo '<script>
                  
                      action = \'active\';
                      $(\'#ajax-load\').hide();
-                    $(\'#load_data_message\').html(\'<div class="w3-panel w3-yellow"><h3>抱歉！</h3><p>没有找到相关视频</p></div>\');
+                    $(\'#load_data_message\').html(\'<div class="w3-panel w3-yellow"><h3>Sorry</h3><p>No Results Found</p></div>\');
                 } else {
                     action = "inactive";
                     $(\'#ajax-load\').hide();
@@ -282,7 +276,7 @@ echo '<script>
             <img src="'.Root_part().'1.png" class="logo">
             <div class="wrap">
                 <div class="search">
-                <form action="./index.php/search">
+                <form action="./search.php">
                     <input type="text" name="q" class="searchTerm" style="box-sizing: initial">
                     <button type="submit" class="searchButton"> <i class="fas fa-arrow-right"></i>
                     </form>
@@ -291,13 +285,13 @@ echo '<script>
             </div>
         </div>
         <div class="w3-container w3-center" style="background-color: #fff;margin-top: 10px;">
-        <h3>#时下流行#</h3>
+        <h3>Popular</h3>
             <div class="tj">';
             $home_data=get_trending($key,'25','','tw');
             
             foreach ($home_data["items"] as $v) {
                 echo '
-                <a href="'.Root_part().'index.php/watch?'. $v["id"].'" >
+                <a href="'.Root_part().'watch?'. $v["id"].'" >
                 <div class="Media">
                 
                         <div class="Media-body">
@@ -316,8 +310,8 @@ echo '<script>
         $(\'.searchTerm\').tw_input_placeholder({
             speed: 100,
             delay: 2000,
-            keywords: [\'想看点啥?\', \'您可以输入一个Youtube视频链接\', \'https://www.youtube.com/watch?v=3qrsX5PIUn4\', \'或者是输入一个关键词搜索\',
-                    \'Music\']
+            keywords: [\'Music\', \'Movie\',
+                    \'Video\']
         });
         </script></div></div>';
         

@@ -1,0 +1,4 @@
+[24-May-2020 13:45:43 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 16
+[24-May-2020 18:32:25 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 16
+[24-May-2020 21:33:52 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 16
+[24-May-2020 21:34:00 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 16

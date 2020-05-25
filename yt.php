@@ -96,9 +96,8 @@ function quality($itag) {
                 break;
         }
     } 
-if (isset($_GET['url'])) {
-    parse_str( parse_url( $_GET['url'], PHP_URL_QUERY ), $vars );
-    $id=$vars['v'];
+if (isset($_GET['vv'])) {
+    $id=$_GET['vv'];
  
 }else{
     echo 'no url';
@@ -212,30 +211,40 @@ parse_str($data,$info);
         $jsn_str=str_replace("\u0026","&",$streams);
         $streamin_data_json=json_decode($jsn_str, true);
 $stream=$streamin_data_json["streamingData"]["formats"][0];
+
+/*
 if (isset($stream["cipher"])) {
     parse_str($stream["cipher"],$dturl);
  echo '<a href="'.$dturl['url'].'&sig='.sig($dturl['s']).'">Download</a> '.quality($stream["itag"]).'</br>';
 }else{
 echo '<a href="'.$stream['url'].'">Download</a> '.quality($stream["itag"]).'</br>';
 }
-
- 
-
-foreach ($streamin_data_json["streamingData"]["adaptiveFormats"] as $stream) {
+*/
 if (isset($stream["cipher"])) {
-    parse_str($stream["cipher"],$dturl);
-    if(quality($stream["itag"]) == "480P") {
-        $LocationUrl = $dturl['url'].'&sig='.sig($dturl['s']);
-    header("Location: $LocationUrl");
+	    parse_str($stream["cipher"],$dturl);
+	    $surl = $stream['url'].'&sig='.sig($dturl['s']);
+	    
+		}else{
+			$surl = $stream['url'];
+		} 
+header("Location: $surl");
+exit();
+/*
+foreach ($streamin_data_json["streamingData"]["adaptiveFormats"] as $stream) {
+
+	if(quality($stream["itag"]) == "480P") {
+		if (isset($stream["cipher"])) {
+	    parse_str($stream["cipher"],$dturl);
+	    $surl = $stream['url'].'&sig='.sig($dturl['s']);
+	    
+		}else{
+			$surl = $stream['url'];
+		} 
+   
+    header("Location: $surl");
     exit();
-    }
-    
- //echo '<a href="'.$dturl['url'].'&sig='.sig($dturl['s']).'">Download</a> '.quality($stream["itag"]).'</br>';
-//}else{
-//echo '<a href="'.$stream['url'].'">Download</a> '.quality($stream["itag"]).'</br>';
-//}
-  
- 
+  }
 }
+*/
 
 ?>
