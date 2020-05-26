@@ -353,8 +353,8 @@ function get_data($url){
 	}
    return $f;  
 }
-//获取热门
-function get_trending($apikey,$max,$pageToken='',$regionCode='vn'){
+
+function get_trending($apikey,$max,$pageToken='',$regionCode='US'){
     $apilink='https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&chart=mostPopular&regionCode='.$regionCode.'&maxResults='.$max.'&key='.$apikey.'&pageToken='.$pageToken;
      return json_decode(get_data($apilink),true);
 }
@@ -365,8 +365,8 @@ $part=rtrim($_SERVER['SCRIPT_NAME'],basename($_SERVER['SCRIPT_NAME']));
 $domain=$_SERVER['SERVER_NAME'];
  return "$http"."$domain"."$part";
 }
-//获取搜索数据
-function get_search_video($query,$apikey,$type='video',$order='relevance',$regionCode='VN',$pageToken=''){
+
+function get_search_video($query,$apikey,$type='video',$order='relevance',$regionCode='US',$pageToken=''){
    $apilink='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&regionCode='.$regionCode.'&order='.$order.'&type='.$type.'&q='.$query.'&key='.$apikey.'&pageToken='.$pageToken;
    return json_decode(get_data($apilink),true);
 }

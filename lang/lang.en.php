@@ -2,7 +2,7 @@
 $lang = array();
 
   /*-------------------
-    Language: Chinese
+    Language: English
   -------------------*/
 
 //////////////// IMPORTANT ! /////////
@@ -160,7 +160,7 @@ $lang['AJAX_API_RM']  = "Request method : GET";
 $lang['AJAX_API_PN']  = "Parameter name";
 $lang['AJAX_API_PD']  = "Parameter Description";
 $lang['AJAX_API_RT']  = "Request type (when the parameter is info, the video information is obtained, and when the parameter is downlink, the video download link is obtained)";
-$lang['AJAX_API_YTVID']  = "Youtube video ID";
+$lang['AJAX_API_YTVID']  = "YouTube video ID";
 $lang['AJAX_API_GVINF']  = "Get video information: (video content, video introduction, creators, etc.)";
 $lang['AJAX_API_EXAMPLE']  = "Request example:";
 $lang['AJAX_API_RVALJSON']  = "Return value: JSON";
