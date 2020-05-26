@@ -2,3 +2,9 @@
 [24-May-2020 18:32:25 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 16
 [24-May-2020 21:33:52 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 16
 [24-May-2020 21:34:00 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 16
+[25-May-2020 19:57:54 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 16
+[25-May-2020 19:57:54 America/New_York] PHP Notice:  Undefined offset: 0 in /home/amato/public_html/tube/ajax/ajax.php on line 234
+[25-May-2020 19:57:54 America/New_York] PHP Notice:  Undefined offset: 0 in /home/amato/public_html/tube/ajax/ajax.php on line 236
+[25-May-2020 19:57:54 America/New_York] PHP Warning:  Missing argument 1 for YoutubeDownloader::__construct(), called in /home/amato/public_html/tube/lib.php on line 221 and defined in /home/amato/public_html/tube/YouTubeDownloader.php on line 8
+[25-May-2020 19:57:54 America/New_York] PHP Notice:  Undefined variable: url in /home/amato/public_html/tube/YouTubeDownloader.php on line 10
+[25-May-2020 19:57:54 America/New_York] PHP Fatal error:  Call to undefined method YoutubeDownloader::getDownloadLinks() in /home/amato/public_html/tube/lib.php on line 222

@@ -1,6 +1,6 @@
 /*! videojs-resolution-switcher - 2015-7-26
  * Copyright (c) 2016 Kasper Moskwiak
- * Modified by Pierre Kraft
+ * Modified by Pierre Kraft and Derk-Jan Hartman
  * Licensed under the Apache-2.0 license. */
 
 (function() {
@@ -15,143 +15,88 @@
   }
 
   (function(window, videojs) {
-
-
-    var defaults = {},
-        videoJsResolutionSwitcher,
-        currentResolution = {}, // stores current resolution
-        menuItemsHolder = {}; // stores menuItems
-
-    function setSourcesSanitized(player, sources, label, customSourcePicker) {
-      currentResolution = {
-        label: label,
-        sources: sources
+    var videoJsResolutionSwitcher,
+      defaults = {
+        ui: true
       };
-      if(typeof customSourcePicker === 'function'){
-        return customSourcePicker(player, sources, label);
-      }
-      return player.src(sources.map(function(src) {
-        return {src: src.src, type: src.type, res: src.res};
-      }));
-    }
 
-  /*
-   * Resolution menu item
-   */
-  var MenuItem = videojs.getComponent('MenuItem');
-  var ResolutionMenuItem = videojs.extend(MenuItem, {
-    constructor: function(player, options, onClickListener, label){
-      this.onClickListener = onClickListener;
-      this.label = label;
-      // Sets this.player_, this.options_ and initializes the component
-      MenuItem.call(this, player, options);
-      this.src = options.src;
+    /*
+     * Resolution menu item
+     */
+    var MenuItem = videojs.getComponent('MenuItem');
+    var ResolutionMenuItem = videojs.extend(MenuItem, {
+      constructor: function(player, options){
+        options.selectable = true;
+        // Sets this.player_, this.options_ and initializes the component
+        MenuItem.call(this, player, options);
+        this.src = options.src;
 
-      this.on('click', this.onClick);
-      this.on('touchstart', this.onClick);
-
-      if (options.initialySelected) {
-        this.showAsLabel();
-        this.selected(true);
-
-        this.addClass('vjs-selected');
+        player.on('resolutionchange', videojs.bind(this, this.update));
       }
-    },
-    showAsLabel: function() {
-      // Change menu button label to the label of this item if the menu button label is provided
-      if(this.label) {
-        this.label.innerHTML = this.options_.label;
-      }
-    },
-    onClick: function(customSourcePicker){
-      this.onClickListener(this);
-      // Remember player state
-      var currentTime = this.player_.currentTime();
-      var isPaused = this.player_.paused();
-      this.showAsLabel();
-
-      // add .current class
-      this.addClass('vjs-selected');
-
-      // Hide bigPlayButton
-      if(!isPaused){
-        this.player_.bigPlayButton.hide();
-      }
-      if(typeof customSourcePicker !== 'function' &&
-        typeof this.options_.customSourcePicker === 'function'){
-        customSourcePicker = this.options_.customSourcePicker;
-      }
-      // Change player source and wait for loadeddata event, then play video
-      // loadedmetadata doesn't work right now for flash.
-      // Probably because of https://github.com/videojs/video-js-swf/issues/124
-      // If player preload is 'none' and then loadeddata not fired. So, we need timeupdate event for seek handle (timeupdate doesn't work properly with flash)
-      var handleSeekEvent = 'loadeddata';
-      if(this.player_.techName_ !== 'Youtube' && this.player_.preload() === 'none' && this.player_.techName_ !== 'Flash') {
-        handleSeekEvent = 'timeupdate';
-      }
-      setSourcesSanitized(this.player_, this.src, this.options_.label, customSourcePicker).one(handleSeekEvent, function() {
-        this.player_.currentTime(currentTime);
-        this.player_.handleTechSeeked_();
-        if(!isPaused){
-          // Start playing and hide loadingSpinner (flash issue ?)
-          this.player_.play().handleTechSeeked_();
-        }
-        this.player_.trigger('resolutionchange');
-        });
-      }
-    });
-
+    } );
+    ResolutionMenuItem.prototype.handleClick = function(event){
+      MenuItem.prototype.handleClick.call(this,event);
+      this.player_.currentResolution(this.options_.label);
+    };
+    ResolutionMenuItem.prototype.update = function(){
+      var selection = this.player_.currentResolution();
+      this.selected(this.options_.label === selection.label);
+    };
+    MenuItem.registerComponent('ResolutionMenuItem', ResolutionMenuItem);
 
     /*
      * Resolution menu button
      */
-     var MenuButton = videojs.getComponent('MenuButton');
-     var ResolutionMenuButton = videojs.extend(MenuButton, {
-       constructor: function(player, options, settings, label){
-        this.sources = options.sources;
-        this.label = label;
-        this.label.innerHTML = options.initialySelectedLabel;
+    var MenuButton = videojs.getComponent('MenuButton');
+    var ResolutionMenuButton = videojs.extend(MenuButton, {
+      constructor: function(player, options){
+        this.label = document.createElement('span');
+        options.label = 'Quality';
         // Sets this.player_, this.options_ and initializes the component
-        MenuButton.call(this, player, options, settings);
+        MenuButton.call(this, player, options);
+        this.el().setAttribute('aria-label','Quality');
         this.controlText('Quality');
 
-        if(settings.dynamicLabel){
-          this.el().appendChild(label);
+        if(options.dynamicLabel){
+          videojs.addClass(this.label, 'vjs-resolution-button-label');
+          this.el().appendChild(this.label);
         }else{
           var staticLabel = document.createElement('span');
-					videojs.addClass(staticLabel, 'vjs-resolution-button-staticlabel');
+          videojs.addClass(staticLabel, 'vjs-menu-icon');
           this.el().appendChild(staticLabel);
         }
-       },
-       createItems: function(){
-         var menuItems = [];
-         var labels = (this.sources && this.sources.label) || {};
-         var onClickUnselectOthers = function(clickedItem) {
-          menuItems.map(function(item) {
-            item.selected(item === clickedItem);
-            item.removeClass('vjs-selected');
-          });
-         };
+        player.on('updateSources', videojs.bind( this, this.update ) );
+      }
+    } );
+    ResolutionMenuButton.prototype.createItems = function(){
+      var menuItems = [];
+      var labels = (this.sources && this.sources.label) || {};
 
-         for (var key in labels) {
-           if (labels.hasOwnProperty(key)) {
-            menuItems.push(new ResolutionMenuItem(
-              this.player_,
-              {
-                label: key,
-                src: labels[key],
-                initialySelected: key === this.options_.initialySelectedLabel,
-                customSourcePicker: this.options_.customSourcePicker
-              },
-              onClickUnselectOthers,
-              this.label));
-             // Store menu item for API calls
-             menuItemsHolder[key] = menuItems[menuItems.length - 1];
-            }
-         }
-         return menuItems;
-       }
-     });
+      // FIXME order is not guaranteed here.
+      for (var key in labels) {
+        if (labels.hasOwnProperty(key)) {
+          menuItems.push(new ResolutionMenuItem(
+            this.player_,
+            {
+              label: key,
+              src: labels[key],
+              selected: key === (this.currentSelection ? this.currentSelection.label : false)
+            })
+          );
+        }
+      }
+      return menuItems;
+    };
+    ResolutionMenuButton.prototype.update = function(){
+      this.sources = this.player_.getGroupedSrc();
+      this.currentSelection = this.player_.currentResolution();
+      this.label.innerHTML = this.currentSelection ? this.currentSelection.label : '';
+      return MenuButton.prototype.update.call(this);
+    };
+    ResolutionMenuButton.prototype.buildCSSClass = function(){
+      return MenuButton.prototype.buildCSSClass.call( this ) + ' vjs-resolution-button';
+    };
+    MenuButton.registerComponent('ResolutionMenuButton', ResolutionMenuButton);
 
     /**
      * Initialize the plugin.
@@ -160,11 +105,10 @@
     videoJsResolutionSwitcher = function(options) {
       var settings = videojs.mergeOptions(defaults, options),
           player = this,
-          label = document.createElement('span'),
-          groupedSrc = {};
+          groupedSrc = {},
+          currentSources = {},
+          currentResolutionState = {};
 
-			videojs.addClass(label, 'vjs-resolution-button-label');
-			
       /**
        * Updates player sources or returns current source URL
        * @param   {Array}  [src] array of sources [{src: '', type: '', label: '', res: ''}]
@@ -173,35 +117,74 @@
       player.updateSrc = function(src){
         //Return current src if src is not given
         if(!src){ return player.src(); }
-        // Dispose old resolution menu button before adding new sources
-        if(player.controlBar.resolutionSwitcher){
-          player.controlBar.resolutionSwitcher.dispose();
-          delete player.controlBar.resolutionSwitcher;
-        }
+
+        // Only add those sources which we can (maybe) play
+        src = src.filter( function(source) {
+          try {
+            return ( player.canPlayType( source.type ) !== '' );
+          } catch (e) {
+            // If a Tech doesn't yet have canPlayType just add it
+            return true;
+          }
+        });
         //Sort sources
-        src = src.sort(compareResolutions);
-        groupedSrc = bucketSources(src);
-        var choosen = chooseSrc(groupedSrc, src);
-        var menuButton = new ResolutionMenuButton(player, { sources: groupedSrc, initialySelectedLabel: choosen.label , initialySelectedRes: choosen.res , customSourcePicker: settings.customSourcePicker}, settings, label);
-				videojs.addClass(menuButton.el(), 'vjs-resolution-button');
-        player.controlBar.resolutionSwitcher = player.controlBar.el_.insertBefore(menuButton.el_, player.controlBar.getChild('fullscreenToggle').el_);
-        player.controlBar.resolutionSwitcher.dispose = function(){
-          this.parentNode.removeChild(this);
+        this.currentSources = src.sort(compareResolutions);
+        this.groupedSrc = bucketSources(this.currentSources);
+        // Pick one by default
+        var chosen = chooseSrc(this.groupedSrc, this.currentSources);
+        this.currentResolutionState = {
+          label: chosen.label,
+          sources: chosen.sources
         };
-        return setSourcesSanitized(player, choosen.sources, choosen.label);
+
+        player.trigger('updateSources');
+        player.setSourcesSanitized(chosen.sources, chosen.label);
+        player.trigger('resolutionchange');
+        return player;
       };
 
       /**
        * Returns current resolution or sets one when label is specified
        * @param {String}   [label]         label name
-       * @param {Function} [customSourcePicker] custom function to choose source. Takes 3 arguments: player, sources, label. Must return player object.
+       * @param {Function} [customSourcePicker] custom function to choose source. Takes 2 arguments: sources, label. Must return player object.
        * @returns {Object}   current resolution object {label: '', sources: []} if used as getter or player object if used as setter
        */
       player.currentResolution = function(label, customSourcePicker){
-        if(label == null) { return currentResolution; }
-        if(menuItemsHolder[label] != null){
-          menuItemsHolder[label].onClick(customSourcePicker);
+        if(label == null) { return this.currentResolutionState; }
+
+        // Lookup sources for label
+        if(!this.groupedSrc || !this.groupedSrc.label || !this.groupedSrc.label[label]){
+          return;
         }
+        var sources = this.groupedSrc.label[label];
+        // Remember player state
+        var currentTime = player.currentTime();
+        var isPaused = player.paused();
+
+        // Hide bigPlayButton
+        if(!isPaused && this.player_.options_.bigPlayButton){
+          this.player_.bigPlayButton.hide();
+        }
+
+        // Change player source and wait for loadeddata event, then play video
+        // loadedmetadata doesn't work right now for flash.
+        // Probably because of https://github.com/videojs/video-js-swf/issues/124
+        // If player preload is 'none' and then loadeddata not fired. So, we need timeupdate event for seek handle (timeupdate doesn't work properly with flash)
+        var handleSeekEvent = 'loadeddata';
+        if(this.player_.techName_ !== 'Youtube' && this.player_.preload() === 'none' && this.player_.techName_ !== 'Flash') {
+          handleSeekEvent = 'timeupdate';
+        }
+        player
+          .setSourcesSanitized(sources, label, customSourcePicker || settings.customSourcePicker)
+          .one(handleSeekEvent, function() {
+            player.currentTime(currentTime);
+            player.handleTechSeeked_();
+            if(!isPaused){
+              // Start playing and hide loadingSpinner (flash issue ?)
+              player.play().handleTechSeeked_();
+            }
+            player.trigger('resolutionchange');
+          });
         return player;
       };
 
@@ -210,7 +193,21 @@
        * @returns {Object} grouped sources: { label: { key: [] }, res: { key: [] }, type: { key: [] } }
        */
       player.getGroupedSrc = function(){
-        return groupedSrc;
+        return this.groupedSrc;
+      };
+
+      player.setSourcesSanitized = function(sources, label, customSourcePicker) {
+        this.currentResolutionState = {
+          label: label,
+          sources: sources
+        };
+        if(typeof customSourcePicker === 'function'){
+          return customSourcePicker(player, sources, label);
+        }
+        player.src(sources.map(function(src) {
+          return {src: src.src, type: src.type, res: src.res};
+        }));
+        return player;
       };
 
       /**
@@ -276,79 +273,91 @@
         } else if (groupedSrc.res[selectedRes]) {
           selectedLabel = groupedSrc.res[selectedRes][0].label;
         }
-				
+
         return {res: selectedRes, label: selectedLabel, sources: groupedSrc.res[selectedRes]};
       }
-			
-			function initResolutionForYt(player){
-				// Init resolution
-				player.tech_.ytPlayer.setPlaybackQuality('default');
-				
-				// Capture events
-				player.tech_.ytPlayer.addEventListener('onPlaybackQualityChange', function(){
-					player.trigger('resolutionchange');
-				});
-				
-				// We must wait for play event
-				player.one('play', function(){
-					var qualities = player.tech_.ytPlayer.getAvailableQualityLevels();
-					// Map youtube qualities names
-					var _yts = {
-						highres: {res: 1080, label: '1080', yt: 'highres'},
-						hd1080: {res: 1080, label: '1080', yt: 'hd1080'}, 
-						hd720: {res: 720, label: '720', yt: 'hd720'}, 
-						large: {res: 480, label: '480', yt: 'large'},
-						medium: {res: 360, label: '360', yt: 'medium'}, 
-						small: {res: 240, label: '240', yt: 'small'},
-						tiny: {res: 144, label: '144', yt: 'tiny'},
-						auto: {res: 0, label: 'auto', yt: 'default'}
-					};
 
-					var _sources = [];
+      function initResolutionForYt(player){
+        // Map youtube qualities names
+        var _yts = {
+          highres: {res: 1080, label: '1080', yt: 'highres'},
+          hd1080: {res: 1080, label: '1080', yt: 'hd1080'},
+          hd720: {res: 720, label: '720', yt: 'hd720'},
+          large: {res: 480, label: '480', yt: 'large'},
+          medium: {res: 360, label: '360', yt: 'medium'},
+          small: {res: 240, label: '240', yt: 'small'},
+          tiny: {res: 144, label: '144', yt: 'tiny'},
+          auto: {res: 0, label: 'auto', yt: 'auto'}
+        };
+        // Overwrite default sourcePicker function
+        var _customSourcePicker = function(_player, _sources, _label){
+          // Note that setPlayebackQuality is a suggestion. YT does not always obey it.
+          player.tech_.ytPlayer.setPlaybackQuality(_sources[0]._yt);
+          player.trigger('updateSources');
+          return player;
+        };
+        settings.customSourcePicker = _customSourcePicker;
 
-					qualities.map(function(q){
-						_sources.push({
-							src: player.src().src,
-							type: player.src().type,
-							label: _yts[q].label,
-							res: _yts[q].res,
-							_yt: _yts[q].yt
-						});
-					});
+        // Init resolution
+        player.tech_.ytPlayer.setPlaybackQuality('auto');
 
-					groupedSrc = bucketSources(_sources);
+        // This is triggered when the resolution actually changes
+        player.tech_.ytPlayer.addEventListener('onPlaybackQualityChange', function(event){
+          for(var res in _yts) {
+            if(res.yt === event.data) {
+              player.currentResolution(res.label, _customSourcePicker);
+              return;
+            }
+          }
+        });
 
-					// Overwrite defualt sourcePicer function
-					var _customSourcePicker = function(_player, _sources, _label){
-						player.tech_.ytPlayer.setPlaybackQuality(_sources[0]._yt);
-						return player;
-					};
+        // We must wait for play event
+        player.one('play', function(){
+          var qualities = player.tech_.ytPlayer.getAvailableQualityLevels();
+          var _sources = [];
 
-					var choosen = {label: 'auto', res: 0, sources: groupedSrc.label.auto};
-					var menuButton = new ResolutionMenuButton(player, { 
-						sources: groupedSrc, 
-						initialySelectedLabel: choosen.label, 
-						initialySelectedRes: choosen.res, 
-						customSourcePicker: _customSourcePicker
-					}, settings, label);
+          qualities.map(function(q){
+            _sources.push({
+              src: player.src().src,
+              type: player.src().type,
+              label: _yts[q].label,
+              res: _yts[q].res,
+              _yt: _yts[q].yt
+            });
+          });
 
-					menuButton.el().classList.add('vjs-resolution-button');
-					player.controlBar.resolutionSwitcher = player.controlBar.addChild(menuButton);
-				});
-			}
-			
-			player.ready(function(){
-				if(player.options_.sources.length > 1){
-					// tech: Html5 and Flash
-					// Create resolution switcher for videos form <source> tag inside <video>
-					player.updateSrc(player.options_.sources);
-				}
-				
-				if(player.techName_ === 'Youtube'){
-					// tech: YouTube
-					initResolutionForYt(player);
-				}
-			});
+          player.groupedSrc = bucketSources(_sources);
+          var chosen = {label: 'auto', res: 0, sources: player.groupedSrc.label.auto};
+
+          this.currentResolutionState = {
+            label: chosen.label,
+            sources: chosen.sources
+          };
+
+          player.trigger('updateSources');
+          player.setSourcesSanitized(chosen.sources, chosen.label, _customSourcePicker);
+        });
+      }
+
+      player.ready(function(){
+        if( settings.ui ) {
+          var menuButton = new ResolutionMenuButton(player, settings);
+          player.controlBar.resolutionSwitcher = player.controlBar.el_.insertBefore(menuButton.el_, player.controlBar.getChild('fullscreenToggle').el_);
+          player.controlBar.resolutionSwitcher.dispose = function(){
+            this.parentNode.removeChild(this);
+          };
+        }
+        if(player.options_.sources.length > 1){
+          // tech: Html5 and Flash
+          // Create resolution switcher for videos form <source> tag inside <video>
+          player.updateSrc(player.options_.sources);
+        }
+
+        if(player.techName_ === 'Youtube'){
+         // tech: YouTube
+         initResolutionForYt(player);
+        }
+      });
 
     };
 
@@ -359,19 +368,8 @@
 
 
 
-
-/* jQuery - Collapser - Plugin v2.0 www.aakashweb.com (c) 2014 Aakash Chakravarthy MIT License. */
-(function(e,m,p,q){function l(b,f){this.o=e.extend({},n,f);this.e=e(b);this.init()}var n={target:"next",mode:"words",speed:"slow",truncate:10,ellipsis:"...",effect:"fade",controlBtn:"",showText:"Show more",hideText:"Hide text",showClass:"show-class",hideClass:"hide-class",atStart:"hide",lockHide:!1,dynamic:!1,changeText:!1,beforeShow:null,afterShow:null,beforeHide:null,afterHide:null};l.prototype={init:function(){var b=this;b.mode=b.o.mode;b.remaining={};b.ctrlHtml=' <span data-ctrl style="text-align: center;display:block;" class="'+
-(e.isFunction(b.o.controlBtn)?"":b.o.controlBtn)+'"></span>';e(b.e).each(function(){e(this).data("oCnt",b.e.html());var a=e.isFunction(b.o.atStart)?b.o.atStart.call(b.e):b.o.atStart,a="undefined"!==typeof b.e.attr("data-start")?b.e.attr("data-start"):a;"hide"==a?b.hide(b.e,0):b.show(b.e,0)});var f;e(m).on("resize",function(){b.o.dynamic&&"lines"==b.mode&&(clearTimeout(f),f=setTimeout(function(){b.reInit(b.e)},100))})},show:function(b,f){var a=this,c=e(b);"undefined"===typeof f&&(f=a.o.speed);var g=function(){e.isFunction(a.o.afterShow)&&
-a.o.afterShow.call(a.e,a)};e.isFunction(a.o.beforeShow)&&a.o.beforeShow.call(a.e,a);switch(a.mode){case "chars":case "words":var d=c.height();c.html(c.data("tHTML"));var h=c.height();c.height(d);c.animate({height:h},f,function(){c.height("auto");g()}).removeClass(a.o.hideClass).addClass(a.o.showClass);c.data("tHTML",c.html());break;case "lines":0==c.children("span").length&&c.wrapInner("<span>");var k=c.children("span"),d=k.height(),h=k.html(c.data("oCnt")).css("height","").height();k.css("height",d);
-k.animate({height:h},f,function(){k.height("auto");g()});c.removeClass(a.o.hideClass).addClass(a.o.showClass);break;case "block":a.blockMode(c,"show",f,g)}a.status=1;if(!0==a.o.lockHide)return c.find("[data-ctrl]").remove(),"";if("block"==a.mode)c.off("click.coll").on("click.coll",function(b){b.preventDefault();a.hide(c)});else 0!=c.find("[data-ctrl]").length||e.isFunction(a.o.controlBtn)||c.append(a.ctrlHtml),a.ctrlBtn=e.isFunction(a.o.controlBtn)?a.o.controlBtn.call(a.e):e(c.find("[data-ctrl]")),
-a.ctrlBtn.off("click.coll").on("click.coll",function(b){b.preventDefault();a.hide(c)}).html(a.o.hideText)},hide:function(b,f){var a=this,c=e(b);"undefined"===typeof f&&(f=a.o.speed);var g=function(){e.isFunction(a.o.afterHide)&&a.o.afterHide.call(a.e,a)};e.isFunction(a.o.beforeHide)&&a.o.beforeHide.call(a.e,a);c.find("[data-ctrl]").remove();switch(a.mode){case "chars":var d=e.trim(c.text());a.remaining.chars=d.length-a.o.truncate;d.length>a.o.truncate&&(c.data("tHTML",c.html()),d=a.pad(d.slice(0,
-a.o.truncate),d.slice(a.o.truncate,d.length)),c.html(d).removeClass(a.o.showClass).addClass(a.o.hideClass),g());break;case "words":d=e.trim(c.text());d=d.split(" ");a.remaining.words=d.length-a.o.truncate;d.length>a.o.truncate&&(c.data("tHTML",c.html()),d=a.pad(d.slice(0,a.o.truncate).join(" "),d.slice(a.o.truncate,d.length).join(" ")),c.html(d).removeClass(a.o.showClass).addClass(a.o.hideClass),g());break;case "lines":0==c.children("span").length&&c.wrapInner("<span>");d=c.children("span").css("height",
-"");d.html(d.text());var h=d.height();"undefined"===typeof c.data("lHeight")?(temp=d.clone(),lHeight=temp.text("a").insertAfter(d).height(),c.data("lHeight",lHeight),d.next().remove()):lHeight=c.data("lHeight");lines=h/lHeight;a.remaining.lines=lines-a.o.truncate;0<a.remaining.lines&&(d.css("overflow","hidden"),d.animate({height:lHeight*a.o.truncate},f).data("tHeight",h),c.removeClass(a.o.showClass).addClass(a.o.hideClass),0!=c.find("[data-ctrl]").length||e.isFunction(a.o.controlBtn)||c.append(a.ctrlHtml),
-g());break;case "block":a.blockMode(c,"hide",f,g)}a.status=0;"block"==a.mode?c.unbind("click.coll").bind("click.coll",function(b){b.preventDefault();a.show(c)}):(a.ctrlBtn=e.isFunction(a.o.controlBtn)?a.o.controlBtn.call(a.e):e(c.find("[data-ctrl]")),a.ctrlBtn.off("click.coll").on("click.coll",function(b){b.preventDefault();a.show(c)}).html(a.o.showText),g=a.o.showText,d={chars:["character","characters"],words:["word","words"],lines:["lines","lines"]},g=g.replace("%s",a.remaining[a.mode]+(1==a.remaining[a.mode]?
-" "+d[a.mode][0]:" "+d[a.mode][1])),a.ctrlBtn.html(g))},pad:function(b,f){return b+'<span class="coll-ellipsis">'+this.o.ellipsis+"</span>"+(e.isFunction(this.o.ctrlBtn)?"":this.ctrlHtml)+'<span class="coll-hidden" style="display:none">'+f+"</span>"},blockMode:function(b,f,a,c){var g=["fadeOut","slideUp","fadeIn","slideDown"],d="fade"==this.o.effect?0:1,g="hide"==f?g[d]:g[d+2];if(e.isFunction(this.o.target))this.o.target.call(this.e)[g](a,c);else if(e.fn[this.o.target])e(b)[this.o.target]()[g](a,
-c);"show"==f?(b.removeClass(this.o.showClass).addClass(this.o.hideClass),this.o.changeText&&b.text(this.o.hideText)):(b.removeClass(this.o.hideClass).addClass(this.o.showClass),this.o.changeText&&b.text(this.o.showText))},reInit:function(b){b.find("[data-ctrl]").remove();b.html(this.e.data("oCnt"));0==this.status?this.hide(b,0):this.show(b,0)}};e.fn.collapser=function(b){return this.each(function(){e.data(this,"collapser")||e.data(this,"collapser",new l(this,b))})}})(jQuery,window,document);
-
+/*jQuery collapser v3.0.0 - (c) 2020 Aakash Chakravarthy*/
+!function(f){var t="collapser",a={mode:"words",speed:"slow",truncate:10,ellipsis:" ... ",controlBtn:null,showText:"Show more",hideText:"Hide text",showClass:"show-class",hideClass:"hide-class",atStart:"hide",blockTarget:"next",blockEffect:"fade",lockHide:!1,changeText:!1,beforeShow:null,afterShow:null,beforeHide:null,afterHide:null};function o(e,t){var o=this;o.o=f.extend({},a,t),o.e=f(e),o.init()}o.prototype={init:function(){var e=this;e.mode=e.o.mode,e.remaining=null,e.ctrlButton=f.isFunction(e.o.controlBtn)?e.o.controlBtn.call(e.e):f('<a href="#" data-ctrl></a>'),"lines"==e.mode&&e.e.wrapInner("<div>");var t=f.isFunction(e.o.atStart)?e.o.atStart.call(e.e):e.o.atStart;"hide"==(t=void 0!==e.e.attr("data-start")?e.e.attr("data-start"):t)?e.hide(0):e.show(0)},show:function(e){var t=this,o=t.e;t.collapsed=!1,void 0===e&&(e=t.o.speed),f.isFunction(t.o.beforeShow)&&t.o.beforeShow.call(t.e,t);function a(){f.isFunction(t.o.afterShow)&&t.o.afterShow.call(t.e,t)}if(o.find("[data-ctrl]").remove(),"block"==t.mode)t.blockMode(o,"show",e,a);else{var n="lines"==t.mode?o.children("div"):o,i=n.height();if("lines"==t.mode)n.height("auto");else{var l=n.data("collHTML");void 0!==l&&n.html(l)}var s=n.height();n.height(i),n.animate({height:s},e,function(){n.height("auto"),a()}),o.removeClass(t.o.hideClass).addClass(t.o.showClass),f.isFunction(t.o.controlBtn)||o.append(t.ctrlButton),t.ctrlButton.html(t.o.hideText)}t.bindEvent(),t.o.lockHide&&t.ctrlButton.remove()},hide:function(e){var t=this,o=t.e;t.collapsed=!0,void 0===e&&(e=t.o.speed),f.isFunction(t.o.beforeHide)&&t.o.beforeHide.call(t.e,t);function a(){f.isFunction(t.o.afterHide)&&t.o.afterHide.call(t.e,t)}if(o.find("[data-ctrl]").remove(),"chars"==t.mode||"words"==t.mode){var n=o.html(),i=t.getCollapsedHTML(n,t.mode,t.o.truncate);if(i){o.data("collHTML",n),o.html(i);var l=o.text();t.remaining=l.split("words"==t.mode?" ":"").length-t.o.truncate}else t.remaining=0}if("lines"==t.mode){var s=o.children("div"),r=s.outerHeight();if(0==(c=s.find("[data-col-char]")).length){var c=f('<span style="display:none" data-col-char>.</span>');s.prepend(c)}var d=c.height(),h=d*t.o.truncate+d/4;r<=h?(h="auto",t.remaining=0):(t.remaining=parseInt(Math.ceil((r-h)/d)),console.log(t.remaining)),s.css({overflow:"hidden",height:h})}"block"==t.mode&&t.blockMode(o,"hide",e,a),a(),"block"!=t.mode&&(o.removeClass(t.o.showClass).addClass(t.o.hideClass),!f.isFunction(t.o.controlBtn)&&0<t.remaining&&o.append(t.ctrlButton),t.ctrlButton.html(t.o.showText)),t.bindEvent()},blockMode:function(e,t,o,a){var n=this,i=["fadeOut","slideUp","fadeIn","slideDown"],l="fade"==n.o.blockEffect?0:1,s="hide"==t?i[l]:i[2+l];f.isFunction(n.o.blockTarget)?n.o.blockTarget.call(n.e)[s](o,a):f.fn[n.o.blockTarget]&&f(e)[n.o.blockTarget]()[s](o,a),"show"==t?(e.removeClass(n.o.showClass).addClass(n.o.hideClass),n.o.changeText&&e.text(n.o.hideText)):(e.removeClass(n.o.hideClass).addClass(n.o.showClass),n.o.changeText&&e.text(n.o.showText))},getCollapsedHTML:function(e,t,o){for(var a=!1,n=0,i=0,l=!0,s=0;s<=e.length;s++){if(char=e.charAt(s),"<"==char&&(a=!0),">"==char&&(a=!1),n==o){i=s,l=!1;break}a||("words"==t&&" "==char&&n++,"chars"==t&&n++)}if(l)return!1;var r=e.slice(0,i);return this.balanceTags(r)+'<span class="coll-ellipsis">'+this.o.ellipsis+"</span>"},balanceTags:function(e){e.lastIndexOf("<")>e.lastIndexOf(">")&&(e=e.substring(0,e.lastIndexOf("<")));var t=e.match(/<[^>]+>/g),o=new Array;for(tag in t)t[tag].search("/")<=0?o.push(t[tag]):1==t[tag].search("/")&&o.pop();for(;0<o.length;){var a=o.pop();e+="</"+(a=a.substring(1,a.search(/[>]/)))+">"}return e},bindEvent:function(){var t=this;("block"==t.mode?t.e:t.ctrlButton).off("click").on("click",function(e){e.preventDefault(),t.collapsed?t.show():t.hide()})}},f.fn[t]=function(e){return this.each(function(){f.data(this,t)||f.data(this,t,new o(this,e))})}}(jQuery,(window,document));
 
 
 function copytext1() {

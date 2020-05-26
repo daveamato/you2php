@@ -1,7 +1,5 @@
  <footer class="p-2 bg-primary">
-        <p class="text-white p-1 m-1 h6">
-           <!--  -->
-        </p>
+        <p class="text-white p-1 m-1 lead">ChowderTube</p>
     </footer>
 
 
@@ -26,11 +24,12 @@
 });
 
  $(function () {
-        var swiper = new Swiper('.swiper-container', {
-            spaceBetween: 20,
-            slidesPerView:'auto',
-            freeMode: true
-        });
-    })
+      var swiper = new Swiper('.swiper-container',{
+          spaceBetween: 20,
+          slidesPerView:'auto',
+          freeMode: true
+      });
+  });
 </script>
-</body></html>
+</body>
+</html>

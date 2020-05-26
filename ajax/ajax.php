@@ -23,7 +23,7 @@ ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
     		}
             	   echo '<ul  class="list-unstyled  video-list-thumbs row pt-1">';
             	   foreach($videodata["items"] as $v) {
-                echo '<li class="col-xs-6 col-sm-6 col-md-4 col-lg-4" ><a href="./watch.php?v='.$v["id"]["videoId"].'" target="_black" class="hhh" title="'.$v["snippet"]["title"].'" >
+                echo '<li class="col-xs-6 col-sm-6 col-md-4 col-lg-4" ><a href="./watch.php?v='.$v["id"]["videoId"].'" target="_self" class="hhh" title="'.$v["snippet"]["title"].'" >
             			<img src="./thumbnail.php?type=mqdefault&vid='.$v["id"]["videoId"].'" class="img-responsive" />
             			<p class="fa fa-play-circle-o kkk" ></p>
             			<span class="text-dark text-overflow font2 my-2">'.$v["snippet"]["title"].'</span></a>
@@ -66,7 +66,7 @@ ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
     		}
       break;
     	case 'channel':
-                  $videodata=get_search_video($q,APIKEY,$ptk,'channel',$order,GJ_CODE);
+                  $videodata=get_search_video($q,$APIKEY,$ptk,'channel',$order,GJ_CODE);
                   echo'<div class="row">';
             	   foreach($videodata['items'] as $v) {
             	    echo '<div class="col-md-6 col-sm-12 col-lg-6 col-xs-6 p-3 offset"><div class="media">
@@ -101,14 +101,14 @@ ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
     		foreach($video['items'] as $v) {
         echo ' <div class="media height1 py-3 pt-3">
     		<div class="media-left" style="width:30%;min-width:30%;">
-    		<a href="./watch.php?v='. $v['id']['videoId'].'" target="_blank" class="d-block" style="position:relative">
+    		<a href="./watch.php?v='. $v['id']['videoId'].'" target="_self" class="d-block" style="position:relative">
     		<img src="./thumbnail.php?type=mqdefault&vid='. $v['id']['videoId'].'" width="100%">
     		<p class="small smallp"><i class="fa fa-clock-o pr-1 text-white"></i>'.format_date($v['snippet']['publishedAt']).'</p>
     		</a>
     		</div>
     		<div class="media-body pl-2"  style="width:70%;max-width:70%;">
     			<h5 class="media-heading listfont">
-    				<a href="./watch.php?v='. $v['id']['videoId'].'" target="_blank" class="font30" title="'.$v["snippet"]["title"].'">'.$v["snippet"]["title"].'</a>
+    				<a href="./watch.php?v='. $v['id']['videoId'].'" target="_self" class="font30" title="'.$v["snippet"]["title"].'">'.$v["snippet"]["title"].'</a>
     			</h5>
     			<p class="listfont1">'.$v['snippet']['description'].'</p>
 
@@ -222,7 +222,7 @@ echo '<h6 class="pt-3"><b>'.$lang['AJAX_USER_NOTICE'].'</b><h6>';
          break;
     case 'videos':
         echo '<div class="font-weight-bold h6 pb-1">'.$lang['AJAX_VIDDOW'].'</div>';
-        echo '<form  onsubmit="return false" id="ipt">
+        echo '<form onsubmit="return false" id="ipt">
   <div class="form-group text-center" >
   <input name="type" value="videodownload" style="display: none;">
       <input type="text" name="link"  placeholder="'.$lang['AJAX_PEYTVL'].'" id="soinpt"  autocomplete="off" /><button type="submit" id="subu" style="width: 24%;vertical-align:middle;border: none;height: 50px;background-color: #e62117;color: #fff;font-size: 18px;display: inline-block;" ><i class="fa fa-download fa-lg pr-1"></i>'.$lang['AJAX_DOWN'].'</button>
@@ -288,14 +288,14 @@ echo '<h6 class="pt-3"><b>'.$lang['AJAX_USER_NOTICE'].'</b><h6>';
                 $description = strlen($v['snippet']['description']) > 250 ? substr($v['snippet']['description'],0,250)."...." : $v['snippet']['description'];
                 echo '<div class="media height1 py-3 pt-3 ">
     		<div class="media-left" style="width:30%;min-width:30%;">
-    		<a href="./watch.php?v='.$v['id'].'" target="_blank" class="d-block" style="position:relative">
+    		<a href="./watch.php?v='.$v['id'].'" target="_self" class="d-block" style="position:relative">
     		<img src="./thumbnail.php?type=mqdefault&vid='.$v["id"].'" width="100%">
     		<p class="small smallp"><i class="fa fa-clock-o pr-1 text-white"></i>'.covtime($v['contentDetails']['duration']).'</p>
     		</a>
     		</div>
     		<div class="media-body pl-2"  style="width:70%;max-width:70%;">
     			<h5 class="media-heading listfont">
-    				<a href="./watch.php?v='.$v['id'].'" target="_blank" class="font30">'.$v["snippet"]["title"].'</a>
+    				<a href="./watch.php?v='.$v['id'].'" target="_self" class="font30">'.$v["snippet"]["title"].'</a>
     			</h5>
     			<p class="listfont1">'.$description.'</p>
 

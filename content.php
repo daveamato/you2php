@@ -1,5 +1,5 @@
 <?php
-require_once "lang.conf.php";
+require_once "./lang.conf.php";
 include "./lib.php";
 $cont   = $_GET['cont'];
 $ptk    = $_GET['pageToken'];
@@ -116,12 +116,11 @@ if($cont=="trending"){
             		echo '<option ' . $viewCount .' data-url="./ajax/ajax.php?type=category&sortid='.$sortid.'&order=viewCount&ptk='.$ptk.'">Most Viewed</option>';
             		echo '</select></div></div>';
             		echo '<div id="videocont"></div><script>$("#videocont").load(\'./ajax/ajax.php?type=category&sortid='. $sortid .'&order='.$order.'&ptk='.$ptk.'\');$(\'#paixu\').on(\'change\', function() {loadPage($(this).find(\':selected\').data(\'url\'));});function loadPage(url) {$("#videocont").load(url);}</script>';
-            		        break;
+            		break;
 
 		}?>
 
 		</div>
-
      </div>
   </div>
 

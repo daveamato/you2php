@@ -1,6 +1,6 @@
 <?php
 error_reporting( E_ALL&~E_NOTICE );
-require_once "lang.conf.php";
+require_once "./lang.conf.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,12 +10,12 @@ require_once "lang.conf.php";
 <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
 <meta name="keywords" content="ChowderTube" />
 <meta name="description" content="ChowderTube" />
-<link rel="stylesheet" href="//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
-<link href="//cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css" rel="stylesheet"> 
-<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
-<script src="//cdn.bootcss.com/jqueryui/1.11.2/jquery-ui.js"></script>
-<link href="//cdn.bootcss.com/video.js/5.20.4/alt/video-js-cdn.min.css" rel="stylesheet" />
-<script src="//libs.cdnjs.net/video.js/5.20.4/video.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/fontawesome.min.css" >
+<link href="//cdn.bootcdn.net/ajax/libs/Swiper/5.4.1/css/swiper.min.css" rel="stylesheet"> 
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link href="//cdn.bootcdn.net/ajax/libs/video.js/7.8.1/video-js.min.css" rel="stylesheet" />
+<script src="//cdn.bootcdn.net/ajax/libs/video.js/7.8.1/video.min.js"></script>
 <script type="text/javascript" src="./inc/4.js"></script>
 <link rel="stylesheet" href="./inc/theme.css" type="text/css">
 <link rel="stylesheet" href="./inc/iconfont.css">
@@ -25,7 +25,7 @@ require_once "lang.conf.php";
 <body>
 <nav class="navbar navbar-expand-md bg-primary navbar-dark">
 <div class="container">
-	<a class="navbar-brand" href="./"><i class="fa d-inline fa-youtube-play"></i><b>&nbsp;<?php echo TITLENAME ?></b></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+	<a class="navbar-brand" href="./"><i class="fa d-inline fa-youtube-play"></i><b> <?php echo TITLENAME ?></b></a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 	<div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
 		<ul class="navbar-nav">
 		</ul>
