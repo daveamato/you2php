@@ -1,16 +1,12 @@
 <?php
-
-require_once "lang.conf.php";
-
 /**
  * ChowderTube
  * @author ch0wder
  * @version v2.0
  * @description An open source proxy to YouTube
  */
-
+require_once(dirname(__FILE__).'/lang.conf.php');
 require_once(dirname(__FILE__).'/config.php');
-
 require_once(dirname(__FILE__).'/YouTubeDownloader.php');
  function get_data($url){
     if (!function_exists("curl_init")) {
@@ -20,7 +16,7 @@ require_once(dirname(__FILE__).'/YouTubeDownloader.php');
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
-		curl_setopt($ch, CURLOPT_REFERER, 'http://www.youtube.com/');
+		curl_setopt($ch, CURLOPT_REFERER, 'https://www.youtube.com/');
 		curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.91 Safari/534.30");
 		$f = curl_exec($ch);
 		curl_close($ch);
@@ -233,7 +229,7 @@ echo ' <tbody>
 
       <td>'.$videotype[$value['format']][0].'</td>
       <td>'.$videotype[$value['format']][1].'</td>
-      <td><a href="./downvideo.php?v='.$v.'&quality='.$value['format'].'&name='.$name.'&format='.$videotype[$value['format']][2].'" target="_blank" class="btn btn-outline-success btn-sm">Download</a></td>
+      <td><a href="'.ROOT_PART.'downvideo.php?v='.$v.'&quality='.$value['format'].'&name='.$name.'&format='.$videotype[$value['format']][2].'" target="_blank" class="btn btn-outline-success btn-sm">Download</a></td>
     </tr></tbody>';
     }
     echo '</table>';
@@ -429,11 +425,11 @@ function html5_player($id){
     $yt = new YouTubeDownloader();
     $links = $yt->getDownloadLinks('https://www.youtube.com/watch?v='.$id);
     if(count($links)!=1){
-        echo'<video id="h5player"  class="video-js vjs-fluid mh-100 mw-100" loop="loop" width="100%" preload="auto"  webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" controls="controls" controls preload="auto" width="100%" poster="./thumbnail.php?type=maxresdefault&vid='.$id.'" data-setup=\'\'>';
+        echo'<video id="h5player"  class="video-js vjs-fluid mh-100 mw-100" loop="loop" width="100%" preload="auto"  webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" controls="controls" controls preload="auto" width="100%" poster="'.Root_part().'thumbnail.php?type=maxresdefault&vid='.$id.'" data-setup=\'\'>';
         if(array_key_exists('22',$links)){
-        echo '<source src="./vs.php?vv='.$id.'&quality=720" type=\'video/mp4\' res="720" label=\'720P\'/>';
+        echo '<source src="'.ROOT_PART.'vs.php?vv='.$id.'&quality=720" type=\'video/mp4\' res="720" label=\'720P\'/>';
             };
-        echo '<source src="./vs.php?vv='.$id.'&quality=360" type=\'video/mp4\' res="360" label=\'360P\'/>';
+        echo '<source src="'.ROOT_PART.'vs.php?vv='.$id.'&quality=360" type=\'video/mp4\' res="360" label=\'360P\'/>';
      $slink='https://www.youtube.com/api/timedtext?type=list&v='.$id;
      $vdata=get_data($slink);
      @$xml = simplexml_load_string($vdata);
@@ -445,7 +441,7 @@ function html5_player($id){
     									   ])) {
     	foreach ($array1['track'] as $val) {if ($val['@attributes']['lang_code'] == 'en') {
     			$arr[$val['@attributes']['lang_code']] = "
-    <track kind='captions' src='./tracks.php?vtt={$id}&lang=" . $val['@attributes']
+    <track kind='captions' src='".ROOT_PART."tracks.php?vtt={$id}&lang=" . $val['@attributes']
     ['lang_code'] . "' srclang='" . $val['@attributes']['lang_code'] . "' label='" .
     				   $val['@attributes']['lang_original'] . "'/>";
     		}
@@ -463,12 +459,12 @@ function html5_player($id){
       }
     }
      }elseif(array_key_exists('track',$array1)){
-     echo "<track kind='captions' src='./tracks.php?vtt={$id}&lang=".$array1['track']['@attributes']['lang_code']."' srclang='".$array1['code']."' label='".$array1['track']['@attributes']['lang_original']."' default />";
+     echo "<track kind='captions' src='".ROOT_PART."tracks.php?vtt={$id}&lang=".$array1['track']['@attributes']['lang_code']."' srclang='".$array1['code']."' label='".$array1['track']['@attributes']['lang_original']."' default />";
      }
 
     echo '</video>';
     }else{
-        echo '<img src="./inc/2.svg" class="w-100" onerror="this.onerror=null; this.src="./inc/2.gif"">';
+        echo '<img src="'.ROOT_PART.'inc/2.svg" class="w-100" onerror="this.onerror=null; this.src="'.ROOT_PART.'inc/2.gif"">';
         }
 }
 

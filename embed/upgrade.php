@@ -15,7 +15,7 @@
         $version='4.0';
         $Posttime='20171225';
         $ch=curl_init();
-        curl_setopt($ch,CURLOPT_URL ,'https://raw.githubusercontent.com/zxq2233/You2php.github.io/master/version.json');
+        curl_setopt($ch,CURLOPT_URL ,'https://raw.githubusercontent.com/daveamato/You2tube/master/version.json');
         curl_setopt($ch,CURLOPT_RETURNTRANSFER ,1);
         curl_setopt($ch,CURLOPT_CONNECTTIMEOUT ,20);
         curl_setopt($ch,CURLOPT_REFERER ,'http://www.youtube.com/');

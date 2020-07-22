@@ -8,3 +8,5 @@
 [25-May-2020 19:57:54 America/New_York] PHP Warning:  Missing argument 1 for YoutubeDownloader::__construct(), called in /home/amato/public_html/tube/lib.php on line 221 and defined in /home/amato/public_html/tube/YouTubeDownloader.php on line 8
 [25-May-2020 19:57:54 America/New_York] PHP Notice:  Undefined variable: url in /home/amato/public_html/tube/YouTubeDownloader.php on line 10
 [25-May-2020 19:57:54 America/New_York] PHP Fatal error:  Call to undefined method YoutubeDownloader::getDownloadLinks() in /home/amato/public_html/tube/lib.php on line 222
+[22-Jul-2020 13:51:52 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 16
+[22-Jul-2020 13:59:53 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 16
