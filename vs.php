@@ -222,7 +222,7 @@ echo '<a href="'.$stream['url'].'">Download</a> '.quality($stream["itag"]).'</br
 */
 if (isset($stream["cipher"])) {
 	    parse_str($stream["cipher"],$dturl);
-	    $surl = $stream['url'].'&sig='.sig($dturl['s']);
+	    $surl = $stream['url'].'&'.$dturl['sp'].'='.sig($dturl['s']);
 	    
 		}else{
 			$surl = $stream['url'];
