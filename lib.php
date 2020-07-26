@@ -7,7 +7,7 @@
  */
 //require_once "./lang.conf.php";
 //require_once "./config.php";
-
+include('config.php');
  function get_data($url){
     if (!function_exists("curl_init")) {
 		$f = file_get_contents($url);
