@@ -6,7 +6,7 @@
     if(!is_array($_GET)&&count($_GET)>0){
         exit();
     }
-    $videodata=get_video_info($_GET['v'],APIKEY);
+    $videodata=get_video_info($_GET['v'],$APIKEY);
     $headtitle=$videodata['items']['0']['snippet']['title'].' - '.SITE_NAME;
     include("./header.php");
     if($videodata['pageInfo']['totalResults'] == '0' && $videodata['pageInfo']['resultsPerPage']== '0'){

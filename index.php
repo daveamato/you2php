@@ -1,7 +1,8 @@
 <?php
 ini_set('display_errors', '1');
 ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
-
+include('./lib.php');
+include('./config.php');
 $siteName='ChowderTube';
 
 //youtube API V3 KEY:
@@ -14,7 +15,7 @@ $header='
         <title>'.$siteName.'</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="'.Root_part().'w3.css">'.
+        <link rel="stylesheet" href="./w3.css">'.
 "<style >
                      *,html,body {
                 font-family: arial,'pingfang sc',stheiti,\"microsoft yahei\",sans-serif !important;
@@ -102,7 +103,7 @@ $header='
                 max-width: 720px;
                 margin: auto;
             }
-            .textsty{
+            .textsty {
                 font-size: 12px;
                 color: #bbb;
                 margin: 0;
@@ -154,7 +155,7 @@ $header='
     </head>
      <body style="background-color: #f8f8f8;">
         <div class="w3-container w3-red w3-center" style="height:55px">
-           <img src="'.Root_part().'2.png" alt="logo" style="height:35px;margin: 10px 0" />
+           <img src="./2.png" alt="logo" style="height:35px;margin: 10px 0" />
         </div>';
 $footer='<footer class="w3-container w3-red w3-center" style="width: 100%;bottom: 0px;">
             <p>©<a href="#">ch0wder</a></p>
@@ -164,7 +165,7 @@ $footer='<footer class="w3-container w3-red w3-center" style="width: 100%;bottom
 
 
 
-switch (@$_SERVER['PATH_INFO']) {
+switch ($_SERVER['PATH_INFO']) {
     case '/watch':
        echo $header;
        echo '<div class="w3-container w3-center tj"><div class="w3-panel w3-pale-yellow w3-topbar w3-bottombar w3-border-yellow">
@@ -288,7 +289,7 @@ echo '<script>
         <div class="w3-container w3-center" style="background-color: #fff;margin-top: 10px;">
         <h3>Popular</h3>
             <div class="tj">';
-            $home_data=get_trending($key,'25','','tw');
+            $home_data=get_trending($key,'18');
             
             foreach ($home_data["items"] as $v) {
                 echo '
@@ -354,11 +355,12 @@ function get_data($url){
 	}
    return $f;  
 }
-//获取热门
-function get_trending($apikey,$max,$pageToken='',$regionCode='vn'){
+/*
+function get_trending($apikey,$max,$pageToken='',$regionCode='us'){
     $apilink='https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&chart=mostPopular&regionCode='.$regionCode.'&maxResults='.$max.'&key='.$apikey.'&pageToken='.$pageToken;
      return json_decode(get_data($apilink),true);
 }
+*/
 
 function Root_part(){
 $http=isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
@@ -366,8 +368,8 @@ $part=rtrim($_SERVER['SCRIPT_NAME'],basename($_SERVER['SCRIPT_NAME']));
 $domain=$_SERVER['SERVER_NAME'];
  return "$http"."$domain"."$part";
 }
-//获取搜索数据
-function get_search_video($query,$apikey,$type='video',$order='relevance',$regionCode='VN',$pageToken=''){
+
+function get_search_video($query,$apikey,$type='video',$order='relevance',$regionCode='US',$pageToken=''){
    $apilink='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&regionCode='.$regionCode.'&order='.$order.'&type='.$type.'&q='.$query.'&key='.$apikey.'&pageToken='.$pageToken;
    return json_decode(get_data($apilink),true);
 }

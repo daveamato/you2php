@@ -6,7 +6,7 @@ if(!is_array($_GET)&&count($_GET)<=0){
        exit();
     }
 include("./lib.php");
-$channel=get_channel_info($_GET['channelid'],APIKEY);
+$channel=get_channel_info($_GET['channelid'],$APIKEY);
 $headtitle=$channel['items'][0]['snippet']['title'].'-'.SITE_NAME;
 include("./header.php");
 if(isset($_GET['pageToken'])){$ptk=$_GET["pageToken"];} else {$ptk='';}
