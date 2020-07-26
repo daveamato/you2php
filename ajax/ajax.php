@@ -13,7 +13,7 @@ $sortid=$_GET['sortid'] or '24';
 switch($type){
         case 'json':
           $videodata=get_search_video($q,APIKEY,$ptk,'video',$order,GJ_CODE);
-          echo json_encode($videodata);
+          return json_encode($videodata);
           exit;
     	case 'video':
             	   $videodata=get_search_video($q,APIKEY,$ptk,'video',$order,GJ_CODE);
