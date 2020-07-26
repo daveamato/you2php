@@ -5,8 +5,8 @@
  * @version v2.0
  * @description An open source proxy to YouTube
  */
-require_once('./lang.conf.php');
-require_once('./config.php');
+include_once('./lang/lang.en.php');
+include_once('./config.php');
 require('./vendor/autoload.php');
 use YouTube\YouTubeDownloader;
 
