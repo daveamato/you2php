@@ -360,7 +360,7 @@ function get_trending($apikey,$max,$pageToken='',$regionCode='us'){
     $apilink='https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&chart=mostPopular&regionCode='.$regionCode.'&maxResults='.$max.'&key='.$apikey.'&pageToken='.$pageToken;
      return json_decode(get_data($apilink),true);
 }
-*/
+
 
 function Root_part(){
 $http=isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
@@ -373,7 +373,7 @@ function get_search_video($query,$apikey,$type='video',$order='relevance',$regio
    $apilink='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&regionCode='.$regionCode.'&order='.$order.'&type='.$type.'&q='.$query.'&key='.$apikey.'&pageToken='.$pageToken;
    return json_decode(get_data($apilink),true);
 }
-
+*/
 ?>
 
  
