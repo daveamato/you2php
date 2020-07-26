@@ -1,8 +1,8 @@
 <?php
 ini_set('display_errors', '1');
 ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
-include('./lib.php');
-require_once('./config.php');
+require_once './lib.php';
+include('config.php');
 $siteName='ChowderTube';
 
 //youtube API V3 KEY:

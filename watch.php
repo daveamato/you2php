@@ -1,8 +1,10 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
 
-    require_once "./lang.conf.php";
-
-    include('./lib.php');
+    require_once './lang.conf.php';
+    require_once './lib.php';
+    include('config.php');
     if(!is_array($_GET)&&count($_GET)>0){
         exit();
     }
