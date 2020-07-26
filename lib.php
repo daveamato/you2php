@@ -8,8 +8,7 @@
 //require_once "./lang.conf.php";
 //require_once "./config.php";
 
-require('./vendor/autoload.php');
-use YouTube\YouTubeDownloader;
+
 include('config.php');
  function get_data($url){
     if (!function_exists("curl_init")) {
@@ -425,7 +424,7 @@ function shareit($id,$title='ChowderTube'){
 }
 
 function html5_player($id){
-		
+    include('YouTubeDownloader.php');
     $yt = new YouTubeDownloader();
     $links = $yt->getDownloadLinks('https://www.youtube.com/watch?v='.$id);
     if(count($links)!=1){
