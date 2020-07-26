@@ -7,8 +7,6 @@
  */
 include_once('./lang/lang.en.php');
 include_once('./config.php');
-require('./vendor/autoload.php');
-use YouTube\YouTubeDownloader;
 
  function get_data($url){
     if (!function_exists("curl_init")) {
@@ -467,7 +465,7 @@ function html5_player($id){
 
     echo '</video>';
     }else{
-        echo '<img src="'.ROOT_PART.'inc/2.svg" class="w-100" onerror="this.onerror=null; this.src="'.ROOT_PART.'inc/2.gif"">';
+        echo '<img src="'.ROOT_PART.'inc/2.svg" class="w-100" onerror="this.onerror=null; this.src="./2.gif"">';
         }
 }
 
