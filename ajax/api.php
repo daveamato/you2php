@@ -6,7 +6,7 @@
     require('../vendor/autoload.php');
     use YouTube\YouTubeDownloader;
     if($_GET['type'] == 'info'){
-      echo json_encode(get_video_info($_GET['v'],$APIKEY));
+      echo json_encode(get_video_info($_GET['v'],APIKEY));
     }elseif ($_GET['type'] == 'downlink') {
     $yt = new YouTubeDownloader();
     $u="https://www.youtube.com/watch?v=".$_GET['v'];

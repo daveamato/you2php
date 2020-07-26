@@ -26,7 +26,7 @@ use YouTube\YouTubeDownloader;
    return $f;
 }
 
-function get_trending($apikey=$APIKEY,$max='18',$pageToken='',$regionCode='US'){
+function get_trending($apikey=APIKEY,$max='18',$pageToken='',$regionCode='US'){
     $apilink='https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&chart=mostPopular&regionCode='.$regionCode.'&maxResults='.$max.'&key='.$apikey.'&pageToken='.$pageToken;
      return json_decode(get_data($apilink),true);
 }

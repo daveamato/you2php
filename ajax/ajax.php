@@ -12,7 +12,7 @@ $order=isset($_GET['order'])?$_GET['order']:'relevance';
 $sortid=$_GET['sortid'] or '24';
 switch($type){
     	case 'video':
-            	   $videodata=get_search_video($q,$APIKEY,$ptk,'video',$order,$GJ_CODE);
+            	   $videodata=get_search_video($q,APIKEY,$ptk,'video',$order,GJ_CODE);
             	   	if($videodata['pageInfo']['totalResults']<=1){
     		    echo'<div class="alert alert-danger h4 p-3 m-2" role="alert">'.$lang['AJAX_ERR1'].'<strong>'.urldecode($q).'</strong>'.$lang['AJAX_TEXT1'].'</div>';
     		    exit;
@@ -62,7 +62,7 @@ switch($type){
     		}
       break;
     	case 'channel':
-                  $videodata=get_search_video($q,$APIKEY,$ptk,'channel',$order,GJ_CODE);
+                  $videodata=get_search_video($q,APIKEY,$ptk,'channel',$order,GJ_CODE);
                   echo'<div class="row">';
             	   foreach($videodata['items'] as $v) {
             	    echo '<div class="col-md-6 col-sm-12 col-lg-6 col-xs-6 p-3 offset"><div class="media">

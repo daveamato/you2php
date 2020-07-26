@@ -15,14 +15,14 @@ switch ($_GET['type'])
         $vidimg = 'http://img.youtube.com/vi/' . $vid . '/0.jpg';
         break;
     case "photo":
-        $photo  = get_channel_info($vid, $APIKEY);
+        $photo  = get_channel_info($vid, APIKEY);
         $vidimg = $photo['items'][0]['snippet']['thumbnails']['default']['url'];
         break;
     case "maxresdefault":
         $vidimg = get_thumbnail_code($vid);
         break;
     case "banner":
-        $vidimg = get_banner($vid, $APIKEY);
+        $vidimg = get_banner($vid, APIKEY);
         break;
     default:
         $vidimg = 'https://i.ytimg.com/vi/' . $vid . '/default.jpg';

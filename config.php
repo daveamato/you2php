@@ -6,5 +6,3 @@ define('SITE_NAME', 'ChowderTube');
 define('TITLENAME', 'ChowderTube');
 define('EN2DEKEY', 'FPBM7DvTzLL7biWdt1mxBLqeAMuPRAHc');
 define('EMAIL', 'mrlaugh01@gmail.com');
-$APIKEY = APIKEY;
-?>
