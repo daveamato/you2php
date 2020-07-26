@@ -288,7 +288,7 @@ echo '<script>
         <div class="w3-container w3-center" style="background-color: #fff;margin-top: 10px;">
         <h3>Popular</h3>
             <div class="tj">';
-            $home_data=get_trending($key,'25','','us');
+            $home_data=get_trending($key,'25','','en');
             
             foreach ($home_data["items"] as $v) {
                 echo '
