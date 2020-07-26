@@ -339,7 +339,7 @@ echo '<script>
 
 
 
-//CURL
+/*
 function get_data($url){
     if (!function_exists("curl_init")) {
 		$f = file_get_contents($url);
@@ -355,7 +355,7 @@ function get_data($url){
 	}
    return $f;  
 }
-/*
+
 function get_trending($apikey,$max,$pageToken='',$regionCode='us'){
     $apilink='https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&chart=mostPopular&regionCode='.$regionCode.'&maxResults='.$max.'&key='.$apikey.'&pageToken='.$pageToken;
      return json_decode(get_data($apilink),true);
