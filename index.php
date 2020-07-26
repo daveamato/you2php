@@ -170,7 +170,7 @@ switch (@$_SERVER['PATH_INFO']) {
     <p>Please try again!</p>
   </div></div>';
        echo '<div class="w3-container w3-center bfq">
-            <iframe width="100%" height="100%" src="../Proxy.php?https://www.youtube.com/embed/'.trim($_SERVER[QUERY_STRING]).'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe width="100%" height="100%" src="./Proxy.php?https://www.youtube.com/embed/'.trim($_SERVER[QUERY_STRING]).'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>'; 
         echo $footer;
         break;
@@ -182,7 +182,7 @@ switch (@$_SERVER['PATH_INFO']) {
         $data='';
         $videodata=get_search_video(urlencode($_GET['q']),$key,'video','relevance','tw',$_GET['pid']);
        foreach ($videodata["items"] as $v) {
-            $data.='<a href="'.Root_part().'watch.php?'.$v["id"]["videoId"].'" ><div class="Media"><div class="Media-body"><h3 class="Media-title">'.$v["snippet"]["title"].'</h3></div><img class="Media-figure Image" src="'.Root_part().'Proxy.php?img.youtube.com/vi/'.$v["id"]["videoId"].'/mqdefault.jpg"></div></a>';
+            $data.='<a href="./watch.php?'.$v["id"]["videoId"].'" ><div class="Media"><div class="Media-body"><h3 class="Media-title">'.$v["snippet"]["title"].'</h3></div><img class="Media-figure Image" src="./Proxy.php?img.youtube.com/vi/'.$v["id"]["videoId"].'/mqdefault.jpg"></div></a>';
         }
         if(!array_key_exists("nextPageToken",$videodata) && array_key_exists("prevPageToken",$videodata)){
             $pid='null';
@@ -199,7 +199,7 @@ switch (@$_SERVER['PATH_INFO']) {
         if(isset($_GET['q'])){
     if(stripos($_GET['q'],'youtu.be')!==false || stripos($_GET['q'],'watch?v=')!==false ){
      preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $_GET['q'], $matches);
-    $str='../watch.php?'.$matches[1];
+    $str='./watch.php?'.$matches[1];
      header("Location:$str");
      exit();}}
         echo $header;
@@ -273,7 +273,7 @@ echo '<script>
     default:
         echo $header;
         echo '<div class="w3-container w3-center" style="background-color: #fff;">
-            <img src="'.Root_part().'1.png" class="logo">
+            <img src="./1.png" class="logo">
             <div class="wrap">
                 <div class="search">
                 <form action="./search.php">
@@ -287,11 +287,11 @@ echo '<script>
         <div class="w3-container w3-center" style="background-color: #fff;margin-top: 10px;">
         <h3>Popular</h3>
             <div class="tj">';
-            $home_data=get_trending($key,'25','','tw');
+            $home_data=get_trending($key,'25','','us');
             
             foreach ($home_data["items"] as $v) {
                 echo '
-                <a href="'.Root_part().'watch?'. $v["id"].'" >
+                <a href="./watch?'. $v["id"].'" >
                 <div class="Media">
                 
                         <div class="Media-body">
@@ -300,7 +300,7 @@ echo '<script>
                             
                         </div>
                     
-                        <img class="Media-figure Image" src="'.Root_part().'Proxy.php?img.youtube.com/vi/'. $v["id"].'/mqdefault.jpg">
+                        <img class="Media-figure Image" src="./Proxy.php?img.youtube.com/vi/'. $v["id"].'/mqdefault.jpg">
                     
                 </div>
                 </a>';
@@ -353,8 +353,8 @@ function get_data($url){
 	}
    return $f;  
 }
-
-function get_trending($apikey,$max,$pageToken='',$regionCode='US'){
+//获取热门
+function get_trending($apikey,$max,$pageToken='',$regionCode='vn'){
     $apilink='https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&chart=mostPopular&regionCode='.$regionCode.'&maxResults='.$max.'&key='.$apikey.'&pageToken='.$pageToken;
      return json_decode(get_data($apilink),true);
 }
@@ -365,8 +365,8 @@ $part=rtrim($_SERVER['SCRIPT_NAME'],basename($_SERVER['SCRIPT_NAME']));
 $domain=$_SERVER['SERVER_NAME'];
  return "$http"."$domain"."$part";
 }
-
-function get_search_video($query,$apikey,$type='video',$order='relevance',$regionCode='US',$pageToken=''){
+//获取搜索数据
+function get_search_video($query,$apikey,$type='video',$order='relevance',$regionCode='VN',$pageToken=''){
    $apilink='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&regionCode='.$regionCode.'&order='.$order.'&type='.$type.'&q='.$query.'&key='.$apikey.'&pageToken='.$pageToken;
    return json_decode(get_data($apilink),true);
 }

@@ -5,9 +5,11 @@
  * @version v2.0
  * @description An open source proxy to YouTube
  */
-require_once(dirname(__FILE__).'/lang.conf.php');
-require_once(dirname(__FILE__).'/config.php');
-require_once(dirname(__FILE__).'/YouTubeDownloader.php');
+require_once('./lang.conf.php');
+require_once('./config.php');
+require('./vendor/autoload.php');
+use YouTube\YouTubeDownloader;
+
  function get_data($url){
     if (!function_exists("curl_init")) {
 		$f = file_get_contents($url);
@@ -422,14 +424,15 @@ function shareit($id,$title='ChowderTube'){
 }
 
 function html5_player($id){
+		use YouTube\YouTubeDownloader;
     $yt = new YouTubeDownloader();
     $links = $yt->getDownloadLinks('https://www.youtube.com/watch?v='.$id);
     if(count($links)!=1){
         echo'<video id="h5player"  class="video-js vjs-fluid mh-100 mw-100" loop="loop" width="100%" preload="auto"  webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" controls="controls" controls preload="auto" width="100%" poster="'.Root_part().'thumbnail.php?type=maxresdefault&vid='.$id.'" data-setup=\'\'>';
         if(array_key_exists('22',$links)){
-        echo '<source src="'.ROOT_PART.'vs.php?vv='.$id.'&quality=720" type=\'video/mp4\' res="720" label=\'720P\'/>';
+        echo '<source src="./vs.php?vv='.$id.'&quality=720" type=\'video/mp4\' res="720" label=\'720P\'/>';
             };
-        echo '<source src="'.ROOT_PART.'vs.php?vv='.$id.'&quality=360" type=\'video/mp4\' res="360" label=\'360P\'/>';
+        echo '<source src="./vs.php?vv='.$id.'&quality=360" type=\'video/mp4\' res="360" label=\'360P\'/>';
      $slink='https://www.youtube.com/api/timedtext?type=list&v='.$id;
      $vdata=get_data($slink);
      @$xml = simplexml_load_string($vdata);

@@ -4,7 +4,8 @@
 @error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 @ignore_user_abort(0);
 @set_time_limit(0);
-include('./YouTubeDownloader.php');
+require('./vendor/autoload.php');
+use YouTube\YouTubeDownloader;
 $yt = new YouTubeDownloader();
 $u="https://www.youtube.com/watch?v=".$_GET['vv'];
 $links = $yt->getDownloadLinks($u);

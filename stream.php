@@ -9,7 +9,8 @@ error_reporting(0);
 @header("Pragma: no-cache");
 @header("Content-Disposition: filename=".$_GET["id"].".mp4");
 
-include('./YouTubeDownloader.php');
+require('./vendor/autoload.php');
+use YouTube\YouTubeDownloader;
 $yt = new YouTubeDownloader();
 $u="https://www.youtube.com/watch?v=".$_GET['vv'];
 $links = $yt->getDownloadLinks($u);

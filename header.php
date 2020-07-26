@@ -1,6 +1,6 @@
 <?php
 error_reporting( E_ALL&~E_NOTICE );
-require_once "./lang.conf.php";
+require_once("./lang.conf.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,8 +19,8 @@ require_once "./lang.conf.php";
 <script type="text/javascript" src="./inc/4.js"></script>
 <link rel="stylesheet" href="./inc/theme.css" type="text/css">
 <link rel="stylesheet" href="./inc/iconfont.css">
-<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-<link rel="icon" href="./favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-primary navbar-dark">

@@ -1,6 +1,6 @@
 <?php
 
-require_once "./lang.conf.php";
+require_once "lang.conf.php";
 
 if(!is_array($_GET)&&count($_GET)<=0){
        exit();

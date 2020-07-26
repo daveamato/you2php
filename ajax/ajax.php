@@ -1,20 +1,16 @@
 <?php
 
-require_once "../lang.conf.php";
-
-error_reporting(E_ALL);
+require_once("../lang.conf.php");
 ini_set('display_errors', '1');
-ini_set('error_log', dirname(__FILE__) . '/error_log.txt');  
-    if(!is_array($_GET)&&count($_GET)<=0){
-       exit();
-    }
-    include('../lib.php');
-    $type=$_GET['type'];
-    @$q=urlencode($_GET['q']);
-    $ptk= isset($_GET['ptk']) ? $_GET['ptk'] : '';
-    $order=isset($_GET['order'])?$_GET['order']:'relevance';
-    $sortid=$_GET['sortid'] or '24';
-    switch($type){
+ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
+if(!is_array($_GET)&&count($_GET)<=0){exit();}
+include('../lib.php');
+$type=$_GET['type'];
+$q=urlencode($_GET['q']);
+$ptk= isset($_GET['ptk']) ? $_GET['ptk'] : '';
+$order=isset($_GET['order'])?$_GET['order']:'relevance';
+$sortid=$_GET['sortid'] or '24';
+switch($type){
     	case 'video':
             	   $videodata=get_search_video($q,APIKEY,$ptk,'video',$order,GJ_CODE);
             	   	if($videodata['pageInfo']['totalResults']<=1){

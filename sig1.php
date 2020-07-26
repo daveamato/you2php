@@ -1,0 +1,1 @@
+<?php $a = str_split($s);$splice($a,3);$reverse($a,80);$splice($a,2);$reverse($a,69);$lengtha($a,67);$lengtha($a,11);

@@ -1,14 +1,15 @@
 <?php 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL); 
-// Load and initialize downloader class 
+error_reporting(E_ALL);
 set_time_limit(0);
-require('./vendor/autoload.php');
 
 $vv = isset($_GET['vv']) ? $_GET['vv'] : die('no ID given');
 
+require('./vendor/autoload.php');
 use YouTube\YouTubeDownloader;
+
+
 
 $yt = new YouTubeDownloader();
 
