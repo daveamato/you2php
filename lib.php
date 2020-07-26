@@ -32,7 +32,7 @@ function get_trending($apikey=APIKEY,$max='18',$pageToken='',$regionCode='US'){
 }
 
 
- function get_video_info($id,$apikey){
+ function get_video_info($id,$apikey=APIKEY){
     $apilink='https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id='.$id.'&key='.$apikey;
      return json_decode(get_data($apilink),true);
 }
@@ -424,7 +424,7 @@ function shareit($id,$title='ChowderTube'){
 }
 
 function html5_player($id){
-		use YouTube\YouTubeDownloader;
+		
     $yt = new YouTubeDownloader();
     $links = $yt->getDownloadLinks('https://www.youtube.com/watch?v='.$id);
     if(count($links)!=1){
