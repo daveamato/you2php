@@ -165,7 +165,7 @@ $footer='<footer class="w3-container w3-red w3-center" style="width: 100%;bottom
 
 
 
-switch ($_SERVER['PATH_INFO']) {
+switch (@$_SERVER['PATH_INFO']) {
     case '/watch':
        echo $header;
        echo '<div class="w3-container w3-center tj"><div class="w3-panel w3-pale-yellow w3-topbar w3-bottombar w3-border-yellow">
