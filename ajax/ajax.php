@@ -12,8 +12,10 @@ $order=isset($_GET['order'])?$_GET['order']:'relevance';
 $sortid=$_GET['sortid'] or '24';
 switch($type){
         case 'json':
+          header('Content-Type: application/json');
           $videodata=get_search_video($q,APIKEY,$ptk,'video',$order,GJ_CODE);
-          return json_encode($videodata);
+          headers('
+          echo json_encode($videodata);
           exit;
     	case 'video':
             	   $videodata=get_search_video($q,APIKEY,$ptk,'video',$order,GJ_CODE);
