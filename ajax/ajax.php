@@ -14,7 +14,6 @@ switch($type){
         case 'json':
           header('Content-Type: application/json');
           $videodata=get_search_video($q,APIKEY,$ptk,'video',$order,GJ_CODE);
-          headers('
           echo json_encode($videodata);
           exit;
     	case 'video':
