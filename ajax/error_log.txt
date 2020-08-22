@@ -1,0 +1,117 @@
+[26-Jul-2020 18:55:03 America/New_York] PHP Warning:  require_once(./lang.conf.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 18:55:03 America/New_York] PHP Fatal error:  require_once(): Failed opening required './lang.conf.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 18:58:35 America/New_York] PHP Warning:  include_once(./lang/lang.en.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 18:58:35 America/New_York] PHP Warning:  include_once(): Failed opening './lang/lang.en.php' for inclusion (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 18:58:35 America/New_York] PHP Warning:  include_once(./config.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 9
+[26-Jul-2020 18:58:35 America/New_York] PHP Warning:  include_once(): Failed opening './config.php' for inclusion (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 9
+[26-Jul-2020 18:58:35 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 10
+[26-Jul-2020 18:58:35 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 10
+[26-Jul-2020 19:01:44 America/New_York] PHP Warning:  include_once(./lang/lang.en.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 19:01:44 America/New_York] PHP Warning:  include_once(): Failed opening './lang/lang.en.php' for inclusion (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 19:01:44 America/New_York] PHP Warning:  include_once(./config.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 9
+[26-Jul-2020 19:01:44 America/New_York] PHP Warning:  include_once(): Failed opening './config.php' for inclusion (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 9
+[26-Jul-2020 19:01:44 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:01:44 America/New_York] PHP Notice:  Use of undefined constant APIKEY - assumed 'APIKEY' in /home/amato/public_html/tube/ajax/ajax.php on line 15
+[26-Jul-2020 19:01:44 America/New_York] PHP Notice:  Use of undefined constant GJ_CODE - assumed 'GJ_CODE' in /home/amato/public_html/tube/ajax/ajax.php on line 15
+[26-Jul-2020 19:01:44 America/New_York] PHP Notice:  Undefined index: pageInfo in /home/amato/public_html/tube/ajax/ajax.php on line 16
+[26-Jul-2020 19:01:44 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 17
+[26-Jul-2020 19:01:44 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 17
+[26-Jul-2020 19:01:48 America/New_York] PHP Warning:  include_once(./lang/lang.en.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 19:01:48 America/New_York] PHP Warning:  include_once(): Failed opening './lang/lang.en.php' for inclusion (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 19:01:48 America/New_York] PHP Warning:  include_once(./config.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 9
+[26-Jul-2020 19:01:48 America/New_York] PHP Warning:  include_once(): Failed opening './config.php' for inclusion (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 9
+[26-Jul-2020 19:01:48 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:01:48 America/New_York] PHP Notice:  Use of undefined constant APIKEY - assumed 'APIKEY' in /home/amato/public_html/tube/ajax/ajax.php on line 15
+[26-Jul-2020 19:01:48 America/New_York] PHP Notice:  Use of undefined constant GJ_CODE - assumed 'GJ_CODE' in /home/amato/public_html/tube/ajax/ajax.php on line 15
+[26-Jul-2020 19:01:48 America/New_York] PHP Notice:  Undefined index: pageInfo in /home/amato/public_html/tube/ajax/ajax.php on line 16
+[26-Jul-2020 19:01:48 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 17
+[26-Jul-2020 19:01:48 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 17
+[26-Jul-2020 19:01:49 America/New_York] PHP Warning:  include_once(./lang/lang.en.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 19:01:49 America/New_York] PHP Warning:  include_once(): Failed opening './lang/lang.en.php' for inclusion (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 19:01:49 America/New_York] PHP Warning:  include_once(./config.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 9
+[26-Jul-2020 19:01:49 America/New_York] PHP Warning:  include_once(): Failed opening './config.php' for inclusion (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 9
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Use of undefined constant APIKEY - assumed 'APIKEY' in /home/amato/public_html/tube/ajax/ajax.php on line 15
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Use of undefined constant GJ_CODE - assumed 'GJ_CODE' in /home/amato/public_html/tube/ajax/ajax.php on line 15
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Undefined index: pageInfo in /home/amato/public_html/tube/ajax/ajax.php on line 16
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 17
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 17
+[26-Jul-2020 19:01:49 America/New_York] PHP Warning:  include_once(./lang/lang.en.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 19:01:49 America/New_York] PHP Warning:  include_once(): Failed opening './lang/lang.en.php' for inclusion (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 19:01:49 America/New_York] PHP Warning:  include_once(./config.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 9
+[26-Jul-2020 19:01:49 America/New_York] PHP Warning:  include_once(): Failed opening './config.php' for inclusion (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 9
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Use of undefined constant APIKEY - assumed 'APIKEY' in /home/amato/public_html/tube/ajax/ajax.php on line 15
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Use of undefined constant GJ_CODE - assumed 'GJ_CODE' in /home/amato/public_html/tube/ajax/ajax.php on line 15
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Undefined index: pageInfo in /home/amato/public_html/tube/ajax/ajax.php on line 16
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 17
+[26-Jul-2020 19:01:49 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 17
+[26-Jul-2020 19:06:23 America/New_York] PHP Warning:  require_once(./lang.conf.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 19:06:23 America/New_York] PHP Fatal error:  require_once(): Failed opening required './lang.conf.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 8
+[26-Jul-2020 19:07:51 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:07:51 America/New_York] PHP Notice:  Use of undefined constant APIKEY - assumed 'APIKEY' in /home/amato/public_html/tube/ajax/ajax.php on line 15
+[26-Jul-2020 19:07:51 America/New_York] PHP Notice:  Use of undefined constant GJ_CODE - assumed 'GJ_CODE' in /home/amato/public_html/tube/ajax/ajax.php on line 15
+[26-Jul-2020 19:07:51 America/New_York] PHP Notice:  Undefined index: pageInfo in /home/amato/public_html/tube/ajax/ajax.php on line 16
+[26-Jul-2020 19:07:51 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 17
+[26-Jul-2020 19:07:51 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 17
+[26-Jul-2020 19:15:39 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:15:40 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:16:09 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:16:09 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:17:11 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:17:12 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:17:16 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:17:16 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:17:24 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:17:24 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:17:26 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:17:26 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:17:31 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:17:32 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:17:35 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:17:35 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:23:58 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:25:35 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:25:51 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:25:52 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:28:16 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:28:16 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:28:25 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:28:25 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:29:23 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:29:23 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:29:26 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:29:26 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:29:29 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:29:29 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:29:32 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:29:32 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:29:33 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:29:33 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:32:12 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:32:12 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:32:41 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:32:41 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:33:19 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:33:19 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:33:25 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:33:25 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 11
+[26-Jul-2020 19:36:47 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:36:47 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:36:53 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:36:53 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:38:27 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:38:27 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:38:40 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:38:41 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 42
+[26-Jul-2020 19:44:33 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:46:09 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:46:51 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:46:52 America/New_York] PHP Notice:  Undefined variable: lang in /home/amato/public_html/tube/ajax/ajax.php on line 46
+[26-Jul-2020 19:51:46 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:51:51 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:51:58 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:52:06 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[26-Jul-2020 19:52:32 America/New_York] PHP Notice:  Undefined index: sortid in /home/amato/public_html/tube/ajax/ajax.php on line 12
+[01-Aug-2020 17:32:32 America/New_York] PHP Warning:  require(./vendor/autoload.php): failed to open stream: No such file or directory in /home/amato/public_html/tube/lib.php on line 10
+[01-Aug-2020 17:32:32 America/New_York] PHP Fatal error:  require(): Failed opening required './vendor/autoload.php' (include_path='.:/usr/share/php') in /home/amato/public_html/tube/lib.php on line 10

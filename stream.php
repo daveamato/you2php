@@ -2,19 +2,29 @@
 @session_start();
 @ob_start();
 error_reporting(0);
-@header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' ); 
+//@header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' ); 
 @header( 'Date: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' ); 
 @header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' ); 
 @header( 'Cache-Control: private, max-age=1' ); 
 @header("Pragma: no-cache");
-@header("Content-Disposition: filename=".$_GET["id"].".mp4");
+@header("Content-Disposition: filename=".$_GET["vv"].".mp4");
+@header('Content-type: video/mp4');
 
 require('./vendor/autoload.php');
 use YouTube\YouTubeDownloader;
 $yt = new YouTubeDownloader();
+
 $u="https://www.youtube.com/watch?v=".$_GET['vv'];
 $links = $yt->getDownloadLinks($u);
-$file_path=$links['22']['url'];
+
+if (isset($links['22'])) {
+	$file_path = $links['22']['url'];
+} elseif (isset($links['18'])) {
+	$file_path = $links['18']['url'];
+} else {
+	$file_path = $links[0]['url'];
+}
+
 function read_body(&$ch,&$string){
 	global $loadedsize;
 	$rtn=strlen($string);
@@ -37,6 +47,7 @@ function read_head(&$ch,&$header){
     return strlen($header); 
 }
 		$header1 = array('Expect: ','Accept: */*');
+		$header1[] = 'Content-type: video/mp4';
 		//$_SERVER['HTTP_RANGE'] = 'bytes=3902905-';
 		if (isset($_SERVER['HTTP_RANGE'])) {
 			$header1[] = 'Range: '.$_SERVER['HTTP_RANGE'];
