@@ -211,7 +211,7 @@ switch (@$_SERVER['PATH_INFO']) {
                <div id="load_data"></div>
                <div id="load_data_message"></div>
                <div id="ajax-load" style="display:none">
-                 <p><img src="../loader.gif">加载中....</p>
+                 <p><img src="../loader.gif">Loading....</p>
                </div>
         </div>';
        
@@ -293,7 +293,7 @@ echo '<script>
             
             foreach ($home_data["items"] as $v) {
                 echo '
-                <a href="./watch?'. $v["id"].'" >
+                <a href="./watch.php?'. $v["id"].'" >
                 <div class="Media">
                 
                         <div class="Media-body">

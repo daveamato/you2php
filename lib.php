@@ -38,9 +38,13 @@ function get_trending($apikey=APIKEY,$max='18',$pageToken='',$regionCode='US'){
      return json_decode(get_data($apilink),true);
 }
 
+function get_search_video($query,$apikey,$type='video',$order='relevance',$regionCode='US',$pageToken=''){
+   $apilink='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&regionCode='.$regionCode.'&order='.$order.'&type='.$type.'&q='.$query.'&key='.$apikey.'&pageToken='.$pageToken;
+   return json_decode(get_data($apilink),true);
+}
 
 function get_channel_info($cid,$apikey){
-   $apilink='https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&hl=zh&id='.$cid.'&key='.$apikey;
+   $apilink='https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&hl=en-US&id='.$cid.'&key='.$apikey;
    return json_decode(get_data($apilink),true);
 }
 
